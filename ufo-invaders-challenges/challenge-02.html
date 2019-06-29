@@ -3,281 +3,363 @@
 
 <head>
     <meta charset="utf-8" />
-    <title>Code Camp 2019k</title>
-    <style>
-        * {
-            padding: 0;
-            margin: 10px;
-            font-size: 95%;
-            font-family: Arial, Helvetica, sans-serif;
-            color: rgb(61, 4, 2);
-        }
-
-        div.directions {
-            margin-left: 10px;
-            width: 500px;
-            font-family: Arial, Helvetica, sans-serif;
-            font-size: 1em;
-            padding: 1px;
-            white-space: pre
-        }
-
-        div.codeblock {
-            border: 1px solid blue;
-            margin-left: 40px;
-            background-color: rgb(227, 227, 245);
-            width: 700px;
-            font-family: Consolas, "Courier New", Courier, monospace;
-            font-size: 1em;
-            padding: 1px;
-            white-space: pre
-        }
-    </style>
+    <title>Code Camp 2019</title>
+    <link href="challenges.css" rel="stylesheet" type="text/css">
 </head>
 
 <body>
     </br>
     <hr>
     <hr>
-    <h1>UFO Invaders: Where's the UFO?</h1>
+    <h1>UFO Invaders: Enhancements</h1>
     <hr>
     <hr>
 
     </br>
+
     <hr>
     <p>
         <strong>
-            Goal #1: Draw a UFO in the Sky.
+            Introduction:
         </strong>
     </p>
     <hr>
 
     <div class="directions">
-        This first UFO is going to be a simple rectangle. That's really boring but
-        for now we just want to get the mechanics working. Later we can replace that
-        with an image or something more complex.
+        Now that we have the evil UFO flying around, it might be nice to have it start
+        abducting some of those cats and chickens. But first, there's some small problems
+        to fix.
 
-        Step 1 - Create a new file called ufo.js in the objects folder.
+        The first problem is we're going to be drawing a lot more objects - like abduction
+        beams, and defense systems and missiles and shields and alien invaders. And that's
+        going be a lot of ctx begin, draw, fill, etc... There's got to be a better way.
 
-        Step 2 - Create a map to represent our ufo. You can look at earth.js or sky.js as examples.
-    </div>
-    <div class="codeblock">
-        <code>
-            export function getUFO(canvas) {
-                return {
-                    type: "rectangle",
-                    x: ?, y: ?, width: ?, height: ?,
-                    color: '#ffff33'
-                };
-            }
-        </code>
-    </div>
-    <div class="directions">
-        Step 3 - Make changes to main.js to draw it.
+        The second problem is all we can draw right now are boring rectangles. What if
+        we want to draw an ellipse, or a more complex object or display a cool image.
+        So we'll fix that too.
 
-        Add the imports.
-        Create a variable called ufo.
-        Create the draw function.
-        And what else is needed to make it work?
-    </div>
-    <div class="codeblock">
-        <code>
-            import {getUFO} from './objects/ufo.js'; 
-            
-            var ufo = getUFO(canvas);
-            
-            function drawUFO(ufo) {
-                ???
-            }
+        And since we set things up to draw more than just rectangles, lets make a slightly
+        better newer improved UFO.
 
-            ???
-        </code>
-    </div>
-    <div class="directions">
-        Display your page and make sure you can see the UFO. It should be
-        sitting up in the sky do nothing except looking around for cats chickens.
+        Those are the main things. And along the way, we'll learn how to do arrays, loops,
+        and ifs with elses and ifs with ors and other fun programming things.
     </div>
 
     <hr>
     <p>
         <strong>
-            Goal #2: Make the UFO Move.
+            Goal #1: Improve the UFO Change Direction Code.
         </strong>
     </p>
     <hr>
 
     <div class="directions">
-        Now things are going to get exciting. At least for a couple of seconds.
-
-        Step 1 - Update our ufo and give it two new attributes:
-        - speedX will tell us how fast it moves from left to right. Start that out at 2.
-        - speedY will tell us how fast is moves up and down. Start that out at 2 also.
-
-        Step 2 - Add a new function to ufo.js to update the ufo.
+        Whether you hit the left of right side of the wall, you always change directions by
+        multiplying the speed by -1. Let's add an 'or' statement to that code using '||'.
     </div>
     <div class="codeblock">
         <code>
-        export function updateUFO(ufo) {
-            ufo.x = ????;
-        }
-            </code>
-    </div>
-    <div class="directions">
-        Step 3 - Import that function on main.js
-
-        Step 4 - Call that new function from our draw function.
-        Update first.
-        Then draw.
-
-        Display your page. Watch the UFO fly away!!!
-    </div>
-
-
-    <hr>
-    <p>
-        <strong>
-            Goal #3: The UFO decides to stick around.
-        </strong>
-    </p>
-    <hr>
-
-    <div class="directions">
-        Let's see if we can get the UFO to stay around a little longer.
-
-        Step 1 - Update our ufo and give it four new attributes:
-        maxLeft, maxRight, maxUp and maxDown.
-        Hints: Having the canvas will help.
-    </div>
-
-    <div class="codeblock">
-        <code>
-            export function getUFO(canvas) {
-            
-            maxLeft: ?, maxRight: canvas.?,
-            maxUp: ?, maxDown: canvas.height /?,
-        </code>
-    </div>
-
-    <div class="directions">
-        Step 2 - If the UFO hits the right sides of the screen, have it reverse
-        back the other way.
-    </div>
-
-    <div class="codeblock">
-        <code>
-            if (ufo.x + ufo.width > ufo.maxRight) {
+            if ((ufo.x + ufo.width > ufo.maxRight) || (ufo.x < ufo.maxLeft)) {
                 ufo.speedX = ufo.speedX * -1;
             }
         </code>
     </div>
-
     <div class="directions">
-        Refresh your game and make sure that works.
-        Code a little. Test a little.
+        Now do the same for the up and down direction changes.
+
+        Make sure everything is still working.
     </div>
 
     <hr>
     <p>
         <strong>
-            Goal #4: Make the UFO bounce off the left side.
+            Goal #2 - Consolidate those draw functions in game.js
         </strong>
     </p>
     <hr>
 
     <div class="directions">
-        Write the code to bounce off the left side of the screen.
-        Display your page and make sure it works.
-        Code a little. Test a little.
+        Create a drawObject function.
     </div>
+    <div class="codeblock">
+        <code>
+            function drawObject(object) {
+                //guess what goes here!  
+            }
+        </code>
+    </div>
+    <div class="directions">
+        Now figure out what you can get rid of.
+        And there's something that needs to change.
+
+        Make sure your code still works.
+    </div>
+
 
     <hr>
     <p>
         <strong>
-            Goal #5: Now make it bounce off the top and bottom.
+            Goal #3 - Let's use a loop to remove all those draw objects.
         </strong>
     </p>
     <hr>
 
     <div class="directions">
-        Write the code to bounce off the top and somewhere below.
-        Display your page and make sure it works.
-        Code a little. Test a little.
+        Things are a lot better now.  What if we have a 50 objects to draw? 
+        It's going to get tiring having a long list of drawObject statemments.
+        Let's fix that.
+
+        Step 1 - Let's create a collection of drawables.
+        Do this near the top after we create these things.
     </div>
-
-    <hr>
-    <p>
-        <strong>
-            Goal #6: Still too boring. Aliens aren't that predictable.
-        </strong>
-    </p>
-    <hr>
-
-    <div class="directions">
-        This part will be a bit more challenging. But let's make the UFO fly
-        around randomly and change directions and speed every 2-5 seconds. Because
-        anyone who knows anything about UFOs knows they don't fly around in nice
-        predictable patterns.
-
-        2-5 seconds in javascript is 2000-5000 milliseconds.
-
-        Step 1 - Update your UFO and give it a new attribute called timer.
-    </div>
-
 
     <div class="codeblock">
         <code>
-            timer: Date.now() + 5000
+            var drawables = [earth, sky, ufo];
         </code>
     </div>
 
     <div class="directions">
-        Step 2 - Create a new function call randomize.
-        It will take ufo as input.
-        And for now it won't do anything.
+        Step 2 - Create a new function called drawAll.
+        It can draw all the drawables.
     </div>
 
     <div class="codeblock">
         <code>
-            function randomize(ufo) {
-            }   
-        </code>
-    </div>
-
-    <div class="directions">
-        Step 3 - Now in our update function we'll call randomize every time the timer is done.
-    </div>
-
-    <div class="codeblock">
-        <code>
-            if (Date.now() > ufo.timer) {
-                randomize(ufo);
+            function drawAll(drawables) {
+    
             }
         </code>
     </div>
 
     <div class="directions">
-        Step 4 - Now let's randomize the ufo.
-        All we need to do is change the speeds and set a new timer.
-
-        This might look weird, but it's just 3 lines of code. And since lots of random
-        things might be happening in th game, it's a good idea let this sink in a little.
-
-        Anyway, now we have an example of how it's done.
+        Step 3 - Inside of drawAll we can write a loop..
+        There's other ways to do this, but we'll learn this first.
     </div>
 
     <div class="codeblock">
         <code>
-            // Speeds will be between -4.5 and 4.5
-            ufo.speedX = (Math.floor(Math.random()* 90) - 45)/10;
-            ufo.speedY = (Math.floor(Math.random()* 90) - 45)/10;
-
-            // Timer will be between 2 and 3 seconds in the future.
-            ufo.timer = Date.now() + Math.floor(Math.random() * 1000) + 2000;
+            for (var i = 0; i < drawables.length; i++) {
+                drawObject(drawables[i]);
+            }
         </code>
     </div>
 
     <div class="directions">
-        Nice! It's still a boring rectangle, but that's the way real UFOs fly around right?
+        Step 4 - Remove the drawObjects in the draw function.
+        Instead drawAll!
+    </div>
+
+    <hr>
+    <p>
+        <strong>
+            Goal #4: A New Improved UFO. Getting Closer.
+        </strong>
+    </p>
+    <hr>
+
+    <div class="directions">
+       Step 1 - Move drawAll and drawObjects to draw.js.
+       
+        There's actually a draw.js in the util folder already. So just copy the code there.
+        The drawAll function will need an export.
+        game.js will need to import it.
+        And drawObject should really become drawRectangle. Because that's what it does.
+        And we need to send the ctx into drawAll.
+
+        It will be organized like this.
+    </div>
+
+    <div class="codeblock">
+        <code>
+            function drawRectangle(ctx, object) {
+                //drawObject's code is here.
+            }
+            
+            function drawComplex(ctx, object) {
+                //nothing for now.
+            }
+            
+            export function drawAll(ctx, drawables) {
+                //don't forget to drawRectange here.
+            }
+        </code>
+    </div>
+
+    <div class="directions">
+       Step 2 - In drawAll check for the object's type.
+       
+            If it's a rectangle - call drawRectangle.
+            If it's complex - call drawComplex.
+
+            Test it out and make sure it still works.  We don't have any complex objects yet
+            so this shouldn't be any trouble.        
+
+    </div>
+
+    <hr>
+    <p>
+        <strong>
+            Goal #5: The Complex UFO Arrives.
+        </strong>
+    </p>
+    <hr>
+
+    <div class="directions">
+
+       Step 1 - Make the UFO Complex.
+
+       Step 2 - Give the UFO an array of parts.  We don't have any yet.  But we'll
+       create a place to put them.
+
+       Step 3 - We can't just return the whole ufo.  Assign it to a variable.  And return it.
+
+       Step 4 - Create a function called getParts.  It doesn't need to do anything yet.
+
+       Step 5 - Now after you create the ufo, and before you  return it, assign the result of
+       getParts() to ufo.parts. 
+
+       After all that, you might have something like this.
+
+    </div>
+
+    <div class="codeblock">
+        <code>
+            export function getUFO(canvas) {
+
+                var ufo = {
+                    type: "complex",
+                    parts: [],
+                    .....
+                };
+                ufo.parts = getParts(ufo);
+                return ufo;
+            }
+            
+            function getParts(ufo) {
+            }
+        </code>
+    </div>
+
+    <div class="directions">
+       Step 6 - For now the ufo will be just a top and bottom. 
+    </div>
+
+    <div class="codeblock">
+        <code>
+            
+            function getParts() {
+
+                var top = {
+                    type: "rectangle",
+                    x: ?, y:?, width: ?, height: ?,
+                    color: ?
+                };
+                
+                var bottom = {
+                    type: "rectangle",
+                    x: ?, y: ?, width: ?, height: ?,
+                    color: ?
+                };
+
+                var parts = [top, bottom];
+
+                return parts;
+            }
+        </code>
+    </div>
+
+    <div class="directions">
+       Step 7 - Here's one way to do it. 
+       You'll need to pass ufo to the function to make this work.
+    </div>
+    
+    <div class="codeblock">
+        <code>
+                var top = {
+                    type: "rectangle",
+                    x: ufo.x + (ufo.width /4), y: ufo.y, width: ufo.width/2, height: ufo.height /2,
+                    color: '#ffff33'
+                };
+                
+                var bottom = {
+                    type: "rectangle",
+                    x: ufo.x, y: ufo.y + (ufo.height /2), width: ufo.width, height: ufo.height /2,
+                    color: '#00ff00'
+                };
+        </code>
+    </div>
+
+    <div class="directions">
+       Step 8 - Now all we need to do is update draw.js to draw complex object. 
+       DrawAll should look something like this.
+    </div>
+    
+    <div class="codeblock">
+        <code>
+            function drawAll(ctx, drawables) {
+                for (var i = 0; i < drawables.length; i++) {
+                    var object = drawables[i];
+                    if (object.type == "rectangle") {
+                        drawRectangle(ctx, object);
+                    }
+                    if (object.type == "complex") {
+                        drawComplex(ctx, object.parts);
+                    }
+                }
+            }
+        </code>
+    </div>
+
+    <div class="directions">
+       And drawComplex could look something like this.
+    </div>
+    
+    <div class="codeblock">
+        <code>
+            function drawComplex(ctx, drawables) {
+                for (var i = 0; i < drawables.length; i++) {
+                    var object = drawables[i];
+                    if (object.type == "rectangle") {
+                        drawRectangle(ctx, object);
+                    }
+                    if (object.type == "complex") {
+                        drawComplex(ctx, object.parts);
+                    }
+                }
+            }
+        </code>
+    </div>
+
+    <div class="directions">
+       Step 9 - But that looks a lot like drawAll.  So we could do this.
+    </div>
+    
+    <div class="codeblock">
+        <code>
+            function drawComplex(ctx, drawables) {
+                drawAll(ctx, drawables);
+            }
+        </code>
+    </div>
+
+    <div class="directions">
+       Step 10 - You could make it even simpler, if you want to.
+       Do we even need drawComplex at all?   
+       Anyway, test it out and hope it all works.
+    </div>
+
+    <hr>
+    <p>
+        <strong>
+            Goal #6: Fun challenge
+        </strong>
+    </p>
+    <hr>
+
+    <div class="directions">
+       What would it take to have a second ufo flying around?
+       Or three?  Or ten?
     </div>
 
     <hr>
