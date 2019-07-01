@@ -29,6 +29,24 @@
         <strong>
             Since this game is called UFO Invaders, lets start by creating the evil UFO.
         </strong>
+
+        Starting Branch: cc00-starters
+        Solution Branch: cc01-ufo
+
+
+        Here's the overall plan:
+
+        1. We'll create a ufo object, just like we already have the sky and earth.
+
+        2. We'll give it some speed values. And create an update function that we can
+        use to make it fly.
+
+        3. Since it just flies off the screen, we'll give it some boundaries telling
+        it how far it's allowed to go up, down, left and right. We'll then use
+        those to make it change directions and stay on the screen.
+
+        4. Because ufos don't fly around in nice predictable patterns, we'll randomize
+        its movement.
     </div>
 
     <hr>
@@ -46,42 +64,16 @@
 
         Step 1 - Create a new file called ufo.js in the objects folder.
 
-        Step 2 - Create a map to represent our ufo. You can look at earth.js or sky.js as examples.
-    </div>
-    <div class="codeblock">
-        <code>
-            export function getUFO(canvas) {
-                return {
-                    type: "rectangle",
-                    x: ?, y: ?, width: ?, height: ?,
-                    color: '#ffff33'
-                };
-            }
-        </code>
-    </div>
-    <div class="directions">
-        Step 3 - Make changes to main.js to draw it.
+        Step 2 - Create an object called ufo. Just look at earth.js or sky.js as examples.
+        Place it up in the upper left somewhere.
 
-        Add the imports.
-        Create a variable called ufo.
-        Create the draw function.
-        And what else is needed to make it work?
-    </div>
-    <div class="codeblock">
-        <code>
-            import {getUFO} from './objects/ufo.js'; 
-            
-            var ufo = getUFO(canvas);
-            
-            function drawUFO(ufo) {
-                ???
-            }
+        Step 3 - On main.js import getUFO. Again the same as we do for the earth and sky.
 
-            ???
-        </code>
-    </div>
-    <div class="directions">
-        Display your page and make sure you can see the UFO. It should be
+        Step 4 - Create a drawUFO function. Just like... You got the idea.
+
+        Step 5 - Call the drawUFO function.
+
+        Step 6 - Display your page and make sure you can see the UFO. It should be
         sitting up in the sky do nothing except looking around for cats chickens.
     </div>
 
@@ -94,46 +86,52 @@
     <hr>
 
     <div class="directions">
-        Now things are going to get exciting. At least for a couple of seconds.
+        Now things are going to get exciting. At least for about 3-4 seconds.
 
         Step 1 - Update our ufo and give it two new attributes:
-        - speedX will tell us how fast it moves from left to right. Start that out at 2.
-        - speedY will tell us how fast is moves up and down. Start that out at 2 also.
+        speedX will tell us how fast it moves from left to right. Start that out at 2.
+        speedY will tell us how fast is moves up and down. Start that out at 2 also.
 
         Step 2 - Add a new function to ufo.js to update the ufo.
+
+        Step 3 - In that new function add speed to the ufo's x position.
+
+        Step 4 - Import that function on main.js just like we immported getUFO.
+
+        Step 5 - Call that new function from our draw function.
+        Update first. Then draw.
     </div>
     <div class="codeblock">
         <code>
-        export function updateUFO(ufo) {
-            ufo.x = ????;
-        }
-            </code>
+            export function updateUFO(ufo) {
+                ufo.x = ufo.x + ufo.speedX;
+            }
+
+            import {getUFO, updateUFO} from './objects/ufo.js'; 
+
+            updateUFO(ufo);
+        </code>
     </div>
+
     <div class="directions">
-        Step 3 - Import that function on main.js
-
-        Step 4 - Call that new function from our draw function.
-        Update first.
-        Then draw.
-
         Display your page. Watch the UFO fly away!!!
+        Wow. Breathtaking wasn't it.
     </div>
 
 
     <hr>
     <p>
         <strong>
-            Goal #3: The UFO decides to stick around.
+            Goal #3: Get the UFO to stay on the screen.
         </strong>
     </p>
     <hr>
 
     <div class="directions">
-        Let's see if we can get the UFO to stay around a little longer.
+        Bad UFO! Stay! 
 
         Step 1 - Update our ufo and give it four new attributes:
-        maxLeft, maxRight, maxUp and maxDown.
-        Hints: Having the canvas will help.
+        maxLeft, maxRight, maxUp and maxDown.  Give those some values that make sense.
     </div>
 
     <div class="codeblock">
@@ -146,8 +144,8 @@
     </div>
 
     <div class="directions">
-        Step 2 - If the UFO hits the right sides of the screen, have it reverse
-        back the other way.
+        Step 2 - In the udpate function, ff the UFO hits the right sides of the screen, 
+        have it reverse back the other way.
     </div>
 
     <div class="codeblock">
@@ -161,66 +159,38 @@
     <div class="directions">
         Refresh your game and make sure that works.
         Code a little. Test a little.
+
+        Step 3 - Now do the same for the left and top and bottom.
     </div>
 
     <hr>
     <p>
         <strong>
-            Goal #4: Make the UFO bounce off the left side.
+            Goal #4: Still too boring. Aliens aren't that predictable.
         </strong>
     </p>
     <hr>
 
     <div class="directions">
-        Write the code to bounce off the left side of the screen.
-        Display your page and make sure it works.
-        Code a little. Test a little.
-    </div>
-
-    <hr>
-    <p>
-        <strong>
-            Goal #5: Now make it bounce off the top and bottom.
-        </strong>
-    </p>
-    <hr>
-
-    <div class="directions">
-        Write the code to bounce off the top and somewhere below.
-        Display your page and make sure it works.
-        Code a little. Test a little.
-    </div>
-
-    <hr>
-    <p>
-        <strong>
-            Goal #6: Still too boring. Aliens aren't that predictable.
-        </strong>
-    </p>
-    <hr>
-
-    <div class="directions">
-        This part will be a bit more challenging. But let's make the UFO fly
-        around randomly and change directions and speed every 2-5 seconds. Because
-        anyone who knows anything about UFOs knows they don't fly around in nice
-        predictable patterns.
+        This part will be a bit more challenging. But let's make the UFO fly around randomly 
+        and change directions and speed every 2-5 seconds. Becausebanyone who knows anything 
+        about UFOs knows they don't fly around in nice predictable patterns.
 
         2-5 seconds in javascript is 2000-5000 milliseconds.
 
-        Step 1 - Update your UFO and give it a new attribute called timer.
+        Step 1 - Update your UFO and give it a new attribute called timer.  This means do 
+        whatever it is you're doing for 3 seconds.  Then we'll mix thins up.
     </div>
-
 
     <div class="codeblock">
         <code>
-            timer: Date.now() + 5000
+            timer: Date.now() + 3000
         </code>
     </div>
 
     <div class="directions">
         Step 2 - Create a new function call randomize.
-        It will take ufo as input.
-        And for now it won't do anything.
+        It will take ufo as input.  And for now it won't do anything.
     </div>
 
     <div class="codeblock">
@@ -246,20 +216,21 @@
         Step 4 - Now let's randomize the ufo.
         All we need to do is change the speeds and set a new timer.
 
-        This might look weird, but it's just 3 lines of code. And since lots of random
-        things might be happening in th game, it's a good idea let this sink in a little.
+        For the speeds generate a random number 0-90.  Then subtracted 45 to get a
+        random number between -45 and 45.  Then I divided by 10 to get random speeds
+        from -4.5 to 4.5.  That might be too fast, but for now it's good.
 
-        Anyway, now we have an example of how it's done.
+        For the timer we get random numbers between 0 and 1000.  Then add 2000. So 
+        that's 2000-3000 milliseconds.  Or 2-3 seconds.
     </div>
 
     <div class="codeblock">
         <code>
-            // Speeds will be between -4.5 and 4.5
-            ufo.speedX = (Math.floor(Math.random()* 90) - 45)/10;
-            ufo.speedY = (Math.floor(Math.random()* 90) - 45)/10;
-
-            // Timer will be between 2 and 3 seconds in the future.
-            ufo.timer = Date.now() + Math.floor(Math.random() * 1000) + 2000;
+            function randomize(ufo) {
+                ufo.speedX = (Math.floor(Math.random()* 90) - 45)/10;
+                ufo.speedY = (Math.floor(Math.random()* 90) - 45)/10;
+                ufo.timer = Date.now() + Math.floor(Math.random() * 1000) + 2000;
+            }
         </code>
     </div>
 

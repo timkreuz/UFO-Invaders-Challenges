@@ -105,8 +105,8 @@
     <hr>
 
     <div class="directions">
-        Things are a lot better now.  What if we have a 50 objects to draw? 
-        It's going to get tiring having a long list of drawObject statemments.
+        Things are a lot better now.  But what if we have a 50 objects to draw? 
+        Are we really going to have 50 drawObject statemments.
         Let's fix that.
 
         Step 1 - Let's create a collection of drawables.
@@ -121,7 +121,7 @@
 
     <div class="directions">
         Step 2 - Create a new function called drawAll.
-        It can draw all the drawables.
+        It can draw all the drawables. It doesn't do anything yet.
     </div>
 
     <div class="codeblock">
@@ -134,7 +134,7 @@
 
     <div class="directions">
         Step 3 - Inside of drawAll we can write a loop..
-        There's other ways to do this, but we'll learn this first.
+        There's different ways to do this, but we'll learn this first.
     </div>
 
     <div class="codeblock">
@@ -165,7 +165,7 @@
         The drawAll function will need an export.
         game.js will need to import it.
         And drawObject should really become drawRectangle. Because that's what it does.
-        And we need to send the ctx into drawAll.
+        And we will also need to send the ctx into drawAll.
 
         It will be organized like this.
     </div>
@@ -212,7 +212,8 @@
        Step 2 - Give the UFO an array of parts.  We don't have any yet.  But we'll
        create a place to put them.
 
-       Step 3 - We can't just return the whole ufo.  Assign it to a variable.  And return it.
+       Step 3 - We need to do more that just return the ufo map.  
+       Assign it to a variable.  And then return it.
 
        Step 4 - Create a function called getParts.  It doesn't need to do anything yet.
 
@@ -230,7 +231,8 @@
                 var ufo = {
                     type: "complex",
                     parts: [],
-                    .....
+                    ...
+                    //all the other code is still here
                 };
                 ufo.parts = getParts(ufo);
                 return ufo;
@@ -242,7 +244,8 @@
     </div>
 
     <div class="directions">
-       Step 6 - For now the ufo will be just a top and bottom. 
+       Step 6 - For now the ufo will be just a top and bottom. Or really you can do it
+       however you want.  It's up to you.  But nothing fancy here yet. 
     </div>
 
     <div class="codeblock">
