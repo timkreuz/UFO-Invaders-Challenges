@@ -26,9 +26,11 @@
     <hr>
 
     <div class="directions">
-        Now that we have the evil UFO flying around, it might be nice to have it start
-        abducting some of those cats and chickens. But first, there's some small problems
-        to fix.
+        <strong>
+            Now that we have the evil UFO flying around, it might be nice to have it start
+            abducting some of those cats and chickens. But first, there's some small problems
+            to fix.
+        </strong>
 
         The first problem is we're going to be drawing a lot more objects - like abduction
         beams, and defense systems and missiles and shields and alien invaders. And that's
@@ -38,11 +40,13 @@
         we want to draw an ellipse, or a more complex object or display a cool image.
         So we'll fix that too.
 
-        And since we set things up to draw more than just rectangles, lets make a slightly
-        better newer improved UFO.
+        And third, we need to think about the overall strategy to this game before it gets 
+        too complex.  
 
-        Those are the main things. And along the way, we'll learn how to do arrays, loops,
-        and ifs with elses and ifs with ors and other fun programming things.
+        And there's probably a couple of other little things to fix.
+
+        Hopefull this won't be too painful.  A few baby steps and some copy paste we can 
+        get this done.
     </div>
 
     <hr>
@@ -99,270 +103,162 @@
     <hr>
     <p>
         <strong>
-            Goal #3 - Let's use a loop to remove all those draw objects.
+            Goal #3 - Now Overall Strategy.
         </strong>
     </p>
     <hr>
 
     <div class="directions">
-        Things are a lot better now.  But what if we have a 50 objects to draw? 
-        Are we really going to have 50 drawObject statemments.
-        Let's fix that.
+        This thing is going to get complex as we start adding more and more. And complex
+        problems don't need complex solutions.  They need simple ones.
 
-        Step 1 - Let's create a collection of drawables.
-        Do this near the top after we create these things.
+        We'll have an object called game.  It will contain all the objects we're trying to
+        manage.  Right now earth, sky, ufo, stats.  Later, there will be defense systems, aliens, 
+        missiles, abduction beams, cats, exploding chickens... And it will contain the stats 
+        and something to tell us the game is over and few other details we need.
+
+        Then we'll have a function to update the game.
+
+        And another function to draw the game.
+
+        And later we'll have a function to get events.  But that's later.
+
+        So for now we'll just do this. 
+            Is the game over?  No.  Then Update and Draw.
+            Is the game over?  No.  Then Update and Draw.
+            Is the game over?  No.  Then update and Draw.
+            Is the game over?  No.  Then update and Draw.
+
+        You get the idea.  And we'll just do that over and over hundres and thousands of 
+        times until either we destroy the aliens or they destroy us.  At which point the 
+        game will be over and we'll can stop updating and drawing.
+
+        And that's a really simple strategy.  It's so not complicated at all.  
+
+        So let's get this all set up.
+
+        Step 1 - Create a folder.  Call it control.
+
+        Step 2 - Create 3 files there: game.js, update.js, draw.js
+
+        Step 3 - Inside game.js write some code to set up the game.  This will be a 
+        good place to use your copy/paste skills.
+        </draw>
     </div>
 
     <div class="codeblock">
         <code>
-            var drawables = [earth, sky, ufo];
-        </code>
-    </div>
-
-    <div class="directions">
-        Step 2 - Create a new function called drawAll.
-        It can draw all the drawables. It doesn't do anything yet.
-    </div>
-
-    <div class="codeblock">
-        <code>
-            function drawAll(drawables) {
-    
+            import {getEarth} from '../objects/earth.js';
+            import {getSky} from '../objects/sky.js'; 
+            import {getUFO} from '../objects/ufo.js'; 
+            import {getStats} from '../objects/stats.js'; 
+            
+            export function getGame() {
+                var stats = getStats();
+                var canvas = document.getElementById("myCanvas");
+                var ctx = canvas.getContext("2d");
+                var infoCenter = document.getElementById("infoCenter");
+                var infoCtx = infoCenter.getContext("2d");
+                var earth = getEarth(canvas);
+                var sky = getSky(canvas);
+                var ufo = getUFO(canvas);
+            
+                var game = {gameOver: false,
+                            infoCenter: infoCenter, infoCtx: infoCtx,
+                            canvas: canvas, ctx: ctx,
+                            stats: stats,
+                            earth: earth, sky: sky, ufo: ufo};
+                return game;
             }
         </code>
     </div>
 
     <div class="directions">
-        Step 3 - Inside of drawAll we can write a loop..
-        There's different ways to do this, but we'll learn this first.
+        And if you notice.  That's a bunch of stuff we already have in main.js.  But we 
+        can leave it all there in main.js for now.
+
+        Step 4 - Inside update.js let's do our update.
     </div>
 
     <div class="codeblock">
         <code>
-            for (var i = 0; i < drawables.length; i++) {
-                drawObject(drawables[i]);
+            import {updateUFO} from '../objects/ufo.js'; 
+
+            export function updateGame(game) {
+               //missing code. hint: it updates something.
             }
         </code>
     </div>
 
     <div class="directions">
-        Step 4 - Remove the drawObjects in the draw function.
-        Instead drawAll!
-    </div>
-
-    <hr>
-    <p>
-        <strong>
-            Goal #4: A New Improved UFO. Getting Closer.
-        </strong>
-    </p>
-    <hr>
-
-    <div class="directions">
-       Step 1 - Move drawAll and drawObjects to draw.js.
-       
-        There's actually a draw.js in the util folder already. So just copy the code there.
-        The drawAll function will need an export.
-        game.js will need to import it.
-        And drawObject should really become drawRectangle. Because that's what it does.
-        And we will also need to send the ctx into drawAll.
-
-        It will be organized like this.
+        Step 5 - Inside draw.js let's do our drawing.  Another good time to use copy/paste. 
+        There's going to be plenty of chances to do more coding here later.    
     </div>
 
     <div class="codeblock">
         <code>
-            function drawRectangle(ctx, object) {
-                //drawObject's code is here.
+            export function drawGame(game) {
+                displayScore(game);
+                drawObjects(game);
             }
             
-            function drawComplex(ctx, object) {
-                //nothing for now.
+            function displayScore(game) {
+                console.log(game);
+                game.infoCtx.clearRect(0, 0, game.infoCenter.width, game.infoCenter.height);
+                game.infoCtx.fillStyle = "#ffffff";
+                game.infoCtx.fillText("Score: " + game.stats.score + "          Abductions: " + game.stats.abductions +
+                    "          Aliens Landed: " + game.stats.visitors, 8, 20);
             }
             
-            export function drawAll(ctx, drawables) {
-                //don't forget to drawRectange here.
-            }
-        </code>
-    </div>
-
-    <div class="directions">
-       Step 2 - In drawAll check for the object's type.
-       
-            If it's a rectangle - call drawRectangle.
-            If it's complex - call drawComplex.
-
-            Test it out and make sure it still works.  We don't have any complex objects yet
-            so this shouldn't be any trouble.        
-
-    </div>
-
-    <hr>
-    <p>
-        <strong>
-            Goal #5: The Complex UFO Arrives.
-        </strong>
-    </p>
-    <hr>
-
-    <div class="directions">
-
-       Step 1 - Make the UFO Complex.
-
-       Step 2 - Give the UFO an array of parts.  We don't have any yet.  But we'll
-       create a place to put them.
-
-       Step 3 - We need to do more that just return the ufo map.  
-       Assign it to a variable.  And then return it.
-
-       Step 4 - Create a function called getParts.  It doesn't need to do anything yet.
-
-       Step 5 - Now after you create the ufo, and before you  return it, assign the result of
-       getParts() to ufo.parts. 
-
-       After all that, you might have something like this.
-
-    </div>
-
-    <div class="codeblock">
-        <code>
-            export function getUFO(canvas) {
-
-                var ufo = {
-                    type: "complex",
-                    parts: [],
-                    ...
-                    //all the other code is still here
-                };
-                ufo.parts = getParts(ufo);
-                return ufo;
+            function drawObjects(game) {
+                game.ctx.clearRect(0, 0, game.canvas.width, game.canvas.height);
+                drawObject(game.ctx, game.earth);
+                drawObject(game.ctx, game.sky);
+                drawObject(game.ctx, game.ufo);
             }
             
-            function getParts(ufo) {
+            function drawObject(ctx, object) {
+                ctx.beginPath();
+                ctx.rect(object.x, object.y, object.width, object.height);
+                ctx.fillStyle = object.color;
+                ctx.fill();
+                ctx.closePath();
             }
         </code>
     </div>
 
     <div class="directions">
-       Step 6 - For now the ufo will be just a top and bottom. Or really you can do it
-       however you want.  It's up to you.  But nothing fancy here yet. 
+        Step 6 - Now let's clean up main.js. Be ready to be amazed.  
+        You can delete all the stuff we moved out of here.  And rename draw to runGame because 
+        we're doing way more than drawing. And then you should end of with code that looks
+        like this.... 
     </div>
 
     <div class="codeblock">
         <code>
+            import {getGame} from './controllers/game.js';
+            import {drawGame} from './controllers/draw.js';
+            import {updateGame} from './controllers/update.js';
             
-            function getParts() {
-
-                var top = {
-                    type: "rectangle",
-                    x: ?, y:?, width: ?, height: ?,
-                    color: ?
-                };
-                
-                var bottom = {
-                    type: "rectangle",
-                    x: ?, y: ?, width: ?, height: ?,
-                    color: ?
-                };
-
-                var parts = [top, bottom];
-
-                return parts;
-            }
-        </code>
-    </div>
-
-    <div class="directions">
-       Step 7 - Here's one way to do it. 
-       You'll need to pass ufo to the function to make this work.
-    </div>
-    
-    <div class="codeblock">
-        <code>
-                var top = {
-                    type: "rectangle",
-                    x: ufo.x + (ufo.width /4), y: ufo.y, width: ufo.width/2, height: ufo.height /2,
-                    color: '#ffff33'
-                };
-                
-                var bottom = {
-                    type: "rectangle",
-                    x: ufo.x, y: ufo.y + (ufo.height /2), width: ufo.width, height: ufo.height /2,
-                    color: '#00ff00'
-                };
-        </code>
-    </div>
-
-    <div class="directions">
-       Step 8 - Now all we need to do is update draw.js to draw complex object. 
-       DrawAll should look something like this.
-    </div>
-    
-    <div class="codeblock">
-        <code>
-            function drawAll(ctx, drawables) {
-                for (var i = 0; i < drawables.length; i++) {
-                    var object = drawables[i];
-                    if (object.type == "rectangle") {
-                        drawRectangle(ctx, object);
-                    }
-                    if (object.type == "complex") {
-                        drawComplex(ctx, object.parts);
-                    }
+            //add one line of code to get the game
+            
+            function runGame() {
+                if (?????) {
+                    //exactly one one line of code here.
+                } else {
+                    //Exactly two lines of code are missing here.
                 }
             }
+            
+            //Exactly one line of code here.
         </code>
     </div>
 
     <div class="directions">
-       And drawComplex could look something like this.
-    </div>
-    
-    <div class="codeblock">
-        <code>
-            function drawComplex(ctx, drawables) {
-                for (var i = 0; i < drawables.length; i++) {
-                    var object = drawables[i];
-                    if (object.type == "rectangle") {
-                        drawRectangle(ctx, object);
-                    }
-                    if (object.type == "complex") {
-                        drawComplex(ctx, object.parts);
-                    }
-                }
-            }
-        </code>
-    </div>
-
-    <div class="directions">
-       Step 9 - But that looks a lot like drawAll.  So we could do this.
-    </div>
-    
-    <div class="codeblock">
-        <code>
-            function drawComplex(ctx, drawables) {
-                drawAll(ctx, drawables);
-            }
-        </code>
-    </div>
-
-    <div class="directions">
-       Step 10 - You could make it even simpler, if you want to.
-       Do we even need drawComplex at all?   
-       Anyway, test it out and hope it all works.
-    </div>
-
-    <hr>
-    <p>
-        <strong>
-            Goal #6: Fun challenge
-        </strong>
-    </p>
-    <hr>
-
-    <div class="directions">
-       What would it take to have a second ufo flying around?
-       Or three?  Or ten?
+       Check that out.  There's hardly anthing left in main.js.  In fact, looking at that code, 
+       we don't have any idea what kind of game this thing is running.  It could be about ufos
+       and aliens. Or it could be rainbows and unicorns and fighting jellyfish.  So just with what
+       we have here, you have what it takes to start creating your own game.  
     </div>
 
     <hr>

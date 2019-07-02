@@ -11,7 +11,7 @@
     </br>
     <hr>
     <hr>
-    <h1>UFO Invaders: Abduction</h1>
+    <h1>UFO Invaders: Enhancements</h1>
     <hr>
     <hr>
 
@@ -26,242 +26,465 @@
     <hr>
 
     <div class="directions">
-        Now it's time for the UFO to start targeting some small animals. And it's going to
-        do that using it's evil Abduction Vacuum Beam. Also known as the AVB.
+        <strong>
+            Now that we have the evil UFO flying around, it might be nice to have it start
+            abducting some of those cats and chickens. But first, there's some small problems
+            to fix.
+        </strong>
 
-        The UFO will pause for three seconds. Think of that as 3000 milliseconds. Then the AVB
-        will instantaneously appear. And it will take 3000 milliseconds for the abduction to 
-        occuur. After which the UFO will again fly around randomly.
+        The first problem is we're going to be drawing a lot more objects - like abduction
+        beams, and defense systems and missiles and shields and alien invaders. And that's
+        going be a lot of ctx begin, draw, fill, etc... There's got to be a better way.
 
-        Why are we pausing for 3000 milliseconds? Because later we want the humans a chance to
-        set up their anti-AVB shield.  But that's later.
+        The second problem is all we can draw right now are boring rectangles. What if
+        we want to draw an ellipse, or a more complex object or display a cool image.
+        So we'll fix that too.
 
-        In order for this to happen we will need to set up a few things.
+        And third, we need to think about the overall strategy to this game before it gets 
+        too complex.  
 
-        First, the UFO is going to need different action modes. Flying, Pre-Abduction, 
-        Abduction and Post-Abduction.  
-        
-        Second, we'll need some kind of timer for each of those action modes.  Wait, the
-        UFO already has one of those.  We'll re-use that.  
+        And there's probably a couple of other little things to fix.
 
-        Third, the AVB should be its own object. That might get tricky. But some of it will
-        be easy. Think long skinny rectangle. And drawing that is already set up. But we might
-        make it more complex if we want to show the abductee getting transported up. But we have
-        that set up already also.
-
-        Fourth, we need some random trigger to start the abduction. We can do this when we
-        update the UFO. Same place where we randomize direction, we can randomize when an
-        abduction will start.
-
-        That's a lot.  Baby steps will get us there....
+        Hopefull this won't be too painful.  A few baby steps and some copy paste we can 
+        get this done.
     </div>
 
     <hr>
     <p>
         <strong>
-            Goal #1: Set up the Action Modes.
+            Goal #1: Improve the UFO Change Direction Code.
         </strong>
     </p>
     <hr>
 
     <div class="directions">
-        In ufo.js give the ufo a mode attribute with a value of "flying".
-        Something like this is fine:
-    </div>
-
-    <div class="codeblock">
-        <code>
-            mode: "flying"
-        </code>
-    </div>
-
-    <div class="directions">
-    </div>
-
-    <hr>
-    <p>
-        <strong>
-            Goal #2 - Trigger an abduction.
-        </strong>
-    </p>
-    <hr>
-
-    <div class="directions">
-        We're really going to trigger a pre-abduction. And when the pre-abduction is done,
-        then the abduction will happen. This will happen randomly.
-
-        Don't we already have a randomize function somewhere?  Yes.  
-
-        Perfect. Every time the timer ends we call randomize. And now instead of just
-        changing directions, we'll need to decide on a next action. Mostly that will
-        be flying.
+        Whether you hit the left of right side of the wall, you always change directions by
+        multiplying the speed by -1. Let's add an 'or' statement to that code using '||'.
     </div>
     <div class="codeblock">
         <code>
-            function randomize(ufo) {
-
-                if (ufo.mode == "Pre-Abduction") {
-                    //pre-abduction is over!  What next?
-                } else if (ufo.mode == "Abduction") {
-                    //abduction is over.  What next?
-                } else if (ufo.mode == "Post-Abduction") {
-                    //Time to start flying again.  
-                } else if (ufo.mode == "Flying") {
-                    var r = (Math.floor(Math.random() * 1000))
-                    if (r <= ??) {
-                        //Start an Abduction!!
-                    } else {
-                        //Otherwise do our usual randomm flying stuff.
-                    }
-                }
+            if ((ufo.x + ufo.width > ufo.maxRight) || (ufo.x < ufo.maxLeft)) {
+                ufo.speedX = ufo.speedX * -1;
             }
         </code>
     </div>
     <div class="directions">
-        Hopefully you got that working. Test it out and see what happens.
-        And working right now means the UFO stops moving for about 6 seconds.
+        Now do the same for the up and down direction changes.
 
-        And if it doesn't stop moving then it means we forgot something.
-        We should only update the position of the UFO, when the UFO is ________.
+        Make sure everything is still working.
+    </div>
+
+    <hr>
+    <p>
+        <strong>
+            Goal #2 - Consolidate those draw functions in game.js
+        </strong>
+    </p>
+    <hr>
+
+    <div class="directions">
+        Create a drawObject function.
+    </div>
+    <div class="codeblock">
+        <code>
+            function drawObject(object) {
+                //guess what goes here!  
+            }
+        </code>
+    </div>
+    <div class="directions">
+        Now figure out what you can get rid of.
+        And there's something that needs to change.
+
+        Make sure your code still works.
     </div>
 
 
     <hr>
     <p>
         <strong>
-            Goal #3 - Update the Update.
+            Goal #3 - Now Overall Strategy.
         </strong>
     </p>
     <hr>
 
     <div class="directions">
-        Step 1 - Get the logic setup. 
+        This thing is going to get complex as we start adding more and more. And complex
+        problems don't need complex solutions.  They need simple ones.
 
-        Right now we only udpate when flying.  And that means adjusting the position based
-        on the speed.  But what about the other modes.
+        We'll have an object called game.  It will contain all the objects we're trying to
+        manage.  Right now earth, sky, ufo, stats.  Later, there will be defense systems, aliens, 
+        missiles, abduction beams, cats, exploding chickens... And it will contain the stats 
+        and something to tell us the game is over and few other details we need.
 
-        For Pre-Abduction, we really won't do much for now. We can just make sure the UFO
-        doesn't move.  That should be easy.  Later we can add some special effects if we want.
+        Then we'll have a function to update the game.
 
-        For Abduction, we want to create the beam and add it to the list of drawables.
-        That's a challenge because ufo.js doesn't have the list of drawables.  We'll
-        need to fix that. So we'll leave that blank for now.
+        And another function to draw the game.
 
-        For Post-Abduction, the main thing will be to remmove the beam from the list of
-        drawables.  
-    </div>
+        And later we'll have a function to get events.  But that's later.
 
-    <div class="codeblock">
-            <code>
-                export function updateUFO(ufo) {
-                    if (Date.now() > ufo.timer) randomize(ufo);
+        So for now we'll just do this. 
+            Is the game over?  No.  Then Update and Draw.
+            Is the game over?  No.  Then Update and Draw.
+            Is the game over?  No.  Then update and Draw.
+            Is the game over?  No.  Then update and Draw.
 
-                    if (ufo.mode == "Flying") {
-                        //Keep doing all the stuff we did before.
-                    }
+        You get the idea.  And we'll just do that over and over hundres and thousands of 
+        times until either we destroy the aliens or they destroy us.  At which point the 
+        game will be over and we'll can stop updating and drawing.
 
-                    if (ufo.mode == "Pre-Abduction") {
-                        //Change UFO Color or Add some kind of animation. Later.
-                    }
+        And that's a really simple strategy.  It's so not complicated.  
+        So let's get this all set up.
 
-                    if (ufo.mode == "Abduction") {
-                        var beam = getBeam(ufo);
-                        ufo.beam = beam;
-                        //add beam to drawables.  Not ready yet.  
-                    }
+        Step 1 - Create a folder.  Call it control.
 
-                    if (ufo.mode == "Post-Abduction") {
-                        //Remove the Beam from the drawables.  Not ready yet.
-                    }
+        Step 2 - Create 3 files there: game.js, update.js, draw.js
 
-                    ufo.parts = getParts(ufo);
-                }
-            </code>
-        </div>
-
-    <div class="directions">
-        Step 2 - Create that getBeam fucntion.  It can return null or an empty object
-        for now.  
-
-        Step 3 - We'll need those drawables.  Let's go to main.js and reorganize.  We can put
-        everything in an object called game.  We need to fix a couple things.  This is 
-        only a little bit painful.  Three small changes.    
+        Step 3 - Inside game.js write some code to set up the game.  This will be a 
+        good place to use your copy/paste skills.
+        </draw>
     </div>
 
     <div class="codeblock">
         <code>
-            var game = {stats: stats, drawables: [earth, sky, ufo]};
-            //DELETE the drawables var!!!!
-
-            updateUFO(ufo, game);
-
-            drawAll(ctx, game.drawables);
-        </code>
-    </div>
-
-    <div class="directions">
-        Step 3 - Now when we call updateUFO, pass in the drawables.
-    </div>
-
-    <div class="codeblock">
-        <code>
-                updateUFO(ufo, drawables);
-
-                export function updateUFO(ufo, drawables) {
-        </code>
-    </div>
-
-    <div class="directions">
-        Step 3 - Now update the updateUFO function so it takes in game.
-        
-        Now we're ready to abduct.  Finally.
-    </div>
-
-    <hr>
-    <p>
-        <strong>
-            Goal #4 - Abduction!!!
-        </strong>
-    </p>
-    <hr>
-
-    <div class="directions">
-        Step 1 - Add some detail to our getBeam function.   It's a drawable so it will
-        need all the regular stuff. x, y, width, height and a color.
-    </div>
-
-    <div class="codeblock">
-        <code>
-            function getBeam(ufo) {
-
-                var width = 8;
-                var ufoCenter = ufo.x + (ufo.width /2);
-                var ufoBottom = ufo.y + ufo.height;
+            import {getEarth} from '../objects/earth.js';
+            import {getSky} from '../objects/sky.js'; 
+            import {getUFO} from '../objects/ufo.js'; 
+            import {getStats} from '../objects/stats.js'; 
             
-                var beam = {
+            export function getGame() {
+                var stats = getStats();
+                var canvas = document.getElementById("myCanvas");
+                var ctx = canvas.getContext("2d");
+                var infoCenter = document.getElementById("infoCenter");
+                var infoCtx = infoCenter.getContext("2d");
+                var earth = getEarth(canvas);
+                var sky = getSky(canvas);
+                var ufo = getUFO(canvas);
+            
+                var game = {gameOver: false,
+                            infoCenter: infoCenter, infoCtx: infoCtx,
+                            canvas: canvas, ctx: ctx,
+                            stats: stats,
+                            earth: earth, sky: sky, ufo: ufo};
+                return game;
+            }
+        </code>
+    </div>
+
+    <div class="directions">
+        And if you notice.  That's a bunch of stuff we already have in main.js.  But we 
+        can leave it there for now.
+
+        Step 4 - Inside update.js let's do our update.
+    </div>
+
+    <div class="codeblock">
+        <code>
+            import {updateUFO} from '../objects/ufo.js'; 
+
+            export function updateGame(game) {
+               //missing code. hint: it updates something.
+            }
+        </code>
+    </div>
+
+    <div class="directions">
+        Step 5 - Inside draw.js let's do our drawing.  Another good time to use copy/paste. 
+        There's going to be plenty of chances to do more coding here later.    
+    </div>
+
+    <div class="codeblock">
+        <code>
+            export function drawGame(game) {
+                displayScore(game);
+                drawObjects(game);
+            }
+            
+            function displayScore(game) {
+                console.log(game);
+                game.infoCtx.clearRect(0, 0, game.infoCenter.width, game.infoCenter.height);
+                game.infoCtx.fillStyle = "#ffffff";
+                game.infoCtx.fillText("Score: " + game.stats.score + "          Abductions: " + game.stats.abductions +
+                    "          Aliens Landed: " + game.stats.visitors, 8, 20);
+            }
+            
+            function drawObjects(game) {
+                game.ctx.clearRect(0, 0, game.canvas.width, game.canvas.height);
+                drawObject(game.ctx, game.earth);
+                drawObject(game.ctx, game.sky);
+                drawObject(game.ctx, game.ufo);
+            }
+            
+            function drawObject(ctx, object) {
+                ctx.beginPath();
+                ctx.rect(object.x, object.y, object.width, object.height);
+                ctx.fillStyle = object.color;
+                ctx.fill();
+                ctx.closePath();
+            }
+        </code>
+    </div>
+
+    <div class="directions">
+        Step 6 - Now let's clean up main.js.  Be ready to be amazed.  
+        Notice draw was renamed to runGame.  Because we're doing way more 
+        than drawing. 
+    </div>
+
+    <div class="codeblock">
+        <code>
+            import {getGame} from './controllers/game.js';
+            import {drawGame} from './controllers/draw.js';
+            import {updateGame} from './controllers/update.js';
+            
+            //add code to get the game
+            
+            function runGame() {
+                if (?????) {
+                    //exactly one one off code here.
+                } else {
+                    //Exactly two lines of code are missing here.
+                }
+            }
+            
+            //Exactly one line of code here.
+        </code>
+    </div>
+
+    <div class="directions">
+       Check that out.  There's hardly anthing left in main.js.  In fact, looking at that code, 
+       we don't have any idea what kind of game this thing is running.  It could be about ufos
+       and aliens. Or it could be rainbows and unicorns and fighting jellyfish.  Just with what
+       we have here, you can start creating your own game.  
+    </div>
+
+    <div class="codeblock">
+        <code>
+            for (var i = 0; i < drawables.length; i++) {
+                drawObject(drawables[i]);
+            }
+        </code>
+    </div>
+
+    <div class="directions">
+        Step 4 - Remove the drawObjects in the draw function.
+        Instead drawAll!
+    </div>
+
+    <hr>
+    <p>
+        <strong>
+            Goal #4: A New Improved UFO. Getting Closer.
+        </strong>
+    </p>
+    <hr>
+
+    <div class="directions">
+       Step 1 - Move drawAll and drawObjects to draw.js.
+       
+        There's actually a draw.js in the util folder already. So just copy the code there.
+        The drawAll function will need an export.
+        game.js will need to import it.
+        And drawObject should really become drawRectangle. Because that's what it does.
+        And we will also need to send the ctx into drawAll.
+
+        It will be organized like this.
+    </div>
+
+    <div class="codeblock">
+        <code>
+            function drawRectangle(ctx, object) {
+                //drawObject's code is here.
+            }
+            
+            function drawComplex(ctx, object) {
+                //nothing for now.
+            }
+            
+            export function drawAll(ctx, drawables) {
+                //don't forget to drawRectange here.
+            }
+        </code>
+    </div>
+
+    <div class="directions">
+       Step 2 - In drawAll check for the object's type.
+       
+            If it's a rectangle - call drawRectangle.
+            If it's complex - call drawComplex.
+
+            Test it out and make sure it still works.  We don't have any complex objects yet
+            so this shouldn't be any trouble.        
+
+    </div>
+
+    <hr>
+    <p>
+        <strong>
+            Goal #5: The Complex UFO Arrives.
+        </strong>
+    </p>
+    <hr>
+
+    <div class="directions">
+
+       Step 1 - Make the UFO Complex.
+
+       Step 2 - Give the UFO an array of parts.  We don't have any yet.  But we'll
+       create a place to put them.
+
+       Step 3 - We need to do more that just return the ufo map.  
+       Assign it to a variable.  And then return it.
+
+       Step 4 - Create a function called getParts.  It doesn't need to do anything yet.
+
+       Step 5 - Now after you create the ufo, and before you  return it, assign the result of
+       getParts() to ufo.parts. 
+
+       After all that, you might have something like this.
+
+    </div>
+
+    <div class="codeblock">
+        <code>
+            export function getUFO(canvas) {
+
+                var ufo = {
+                    type: "complex",
+                    parts: [],
+                    ...
+                    //all the other code is still here
+                };
+                ufo.parts = getParts(ufo);
+                return ufo;
+            }
+            
+            function getParts(ufo) {
+            }
+        </code>
+    </div>
+
+    <div class="directions">
+       Step 6 - For now the ufo will be just a top and bottom. Or really you can do it
+       however you want.  It's up to you.  But nothing fancy here yet. 
+    </div>
+
+    <div class="codeblock">
+        <code>
+            
+            function getParts() {
+
+                var top = {
                     type: "rectangle",
-                    x: ufoCenter - (width /2), y: ufoBottom, 
-                    width: width, height:  EARTH_HEIGHT - ufoBottom, 
+                    x: ?, y:?, width: ?, height: ?,
+                    color: ?
+                };
+                
+                var bottom = {
+                    type: "rectangle",
+                    x: ?, y: ?, width: ?, height: ?,
+                    color: ?
+                };
+
+                var parts = [top, bottom];
+
+                return parts;
+            }
+        </code>
+    </div>
+
+    <div class="directions">
+       Step 7 - Here's one way to do it. 
+       You'll need to pass ufo to the function to make this work.
+    </div>
+    
+    <div class="codeblock">
+        <code>
+                var top = {
+                    type: "rectangle",
+                    x: ufo.x + (ufo.width /4), y: ufo.y, width: ufo.width/2, height: ufo.height /2,
+                    color: '#ffff33'
+                };
+                
+                var bottom = {
+                    type: "rectangle",
+                    x: ufo.x, y: ufo.y + (ufo.height /2), width: ufo.width, height: ufo.height /2,
                     color: '#00ff00'
                 };
-                return beam;
+        </code>
+    </div>
+
+    <div class="directions">
+       Step 8 - Now all we need to do is update draw.js to draw complex object. 
+       DrawAll should look something like this.
+    </div>
+    
+    <div class="codeblock">
+        <code>
+            function drawAll(ctx, drawables) {
+                for (var i = 0; i < drawables.length; i++) {
+                    var object = drawables[i];
+                    if (object.type == "rectangle") {
+                        drawRectangle(ctx, object);
+                    }
+                    if (object.type == "complex") {
+                        drawComplex(ctx, object.parts);
+                    }
+                }
             }
         </code>
     </div>
 
     <div class="directions">
-        Step 2 - Go back and finish off our updates.
-        For abduction, add the beam to drawables.  We can use the push command.
+       And drawComplex could look something like this.
     </div>
-
+    
     <div class="codeblock">
         <code>
-            if (ufo.mode == "Abduction") {
-                var beam = getBeam(ufo);
-                ufo.beam = beam;
-                game.drawables.push(beam);
+            function drawComplex(ctx, drawables) {
+                for (var i = 0; i < drawables.length; i++) {
+                    var object = drawables[i];
+                    if (object.type == "rectangle") {
+                        drawRectangle(ctx, object);
+                    }
+                    if (object.type == "complex") {
+                        drawComplex(ctx, object.parts);
+                    }
+                }
             }
         </code>
+    </div>
+
+    <div class="directions">
+       Step 9 - But that looks a lot like drawAll.  So we could do this.
+    </div>
+    
+    <div class="codeblock">
+        <code>
+            function drawComplex(ctx, drawables) {
+                drawAll(ctx, drawables);
+            }
+        </code>
+    </div>
+
+    <div class="directions">
+       Step 10 - You could make it even simpler, if you want to.
+       Do we even need drawComplex at all?   
+       Anyway, test it out and hope it all works.
+    </div>
+
+    <hr>
+    <p>
+        <strong>
+            Goal #6: Fun challenge
+        </strong>
+    </p>
+    <hr>
+
+    <div class="directions">
+       What would it take to have a second ufo flying around?
+       Or three?  Or ten?
     </div>
 
     <hr>
