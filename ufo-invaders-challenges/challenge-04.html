@@ -27,33 +27,33 @@
 
     <div class="directions">
         Now it's time for the UFO to start targeting some small animals. And it's going to
-        do that using it's evil Abduction Vacuum Beam. Also known as the AVB.
+        do that using it's evil Neutronium Abduction Beam. Also known as the NAB.
 
-        The UFO will pause for three seconds. Think of that as 3000 milliseconds. Then the AVB
-        will instantaneously appear. And it will take 3000 milliseconds for the abduction to 
-        occuur. After which the UFO will again fly around randomly.
+        The UFO will pause for three seconds. Think of that as 3000 milliseconds. Then the NAB
+        will instantaneously appear. And it will take 3000 milliseconds for the abduction to
+        occur. After which the UFO will again fly around randomly.
 
         Why are we pausing for 3000 milliseconds? Because later we want the humans a chance to
-        set up their anti-AVB shield.  But that's later.
+        set up their anti-NAB shield. But that's later.
 
         In order for this to happen we will need to set up a few things.
 
-        First, the UFO is going to need different action modes. Flying, Pre-Abduction, 
-        Abduction and Post-Abduction.  
-        
-        Second, we'll need some kind of timer for each of those action modes.  Wait, the
-        UFO already has one of those.  We'll re-use that.  
+        First, the UFO is going to need different action modes. Flying, Pre-Abduction,
+        Abduction and Post-Abduction.
 
-        Third, the AVB should be its own object. That might get tricky. But some of it will
-        be easy. Think long skinny rectangle. And drawing that is already set up. But we might
-        make it more complex if we want to show the abductee getting transported up. But we have
-        that set up already also.
+        Second, we'll need some kind of timer for each of those action modes. And since the ufo
+        already has a timer, we're actually all set.
+
+        Third, the NAB should be its own object - not just an extension of the UFO. That way
+        different ojects can interact with the NAB and the UFO separately if we need to. So for
+        the NAB, think long skinny rectangle. And drawing that is already set up. But we might
+        make it more complex if we want to show the abductee getting transported up.
 
         Fourth, we need some random trigger to start the abduction. We can do this when we
         update the UFO. Same place where we randomize direction, we can randomize when an
         abduction will start.
 
-        That's a lot.  Baby steps will get us there....
+        This is going to be challenging but we can break this down into a bunch of small problems.
     </div>
 
     <hr>
@@ -65,7 +65,9 @@
     <hr>
 
     <div class="directions">
-        In ufo.js give the ufo a mode attribute with a value of "flying".
+        Step 1 - Mode
+
+        In ufo.js give the ufo a mode attribute with a value of "flying" for starters.
         Something like this is fine:
     </div>
 
@@ -76,36 +78,176 @@
     </div>
 
     <div class="directions">
-    </div>
+        Step 2 - Updating Randomize to Change Modes.
 
+        Here's the modes:
+        flying - that's what we're already doing
+        pre-abduction - stop flying.
+        abduction - activate the NAB.
+        post-abduction - de-activate the NAB
+
+        To start an abduction, we can generate a random number. For example: 1-1000. And then if that
+        number is less than some other number, for example 200, then we can start the abduction. But
+        we only want to do that if the UFO is flying.
+
+        Don't we already have a randomize function somewhere? Yes.
+
+        Perfect. Every time the timer ends we call randomize. When we get there, we know that the
+        timer for something came to an end. But the timer for what? So we need some if statements to
+        check the mode. And then for each mode we decide what the next action will be and for how long.
+
+        Try coding that up before checking the solution.
+
+
+        Step #3 - Updating the Updates
+
+        Right now out updates are used to change the position of the UFO based on the speed of
+        the UFO. But that only happens when we're flying. So put an if block around that code.
+
+        We'll come back later and add updates for the other modes. You can add some if blocks for the
+        other modes now if you want. And just leave them empty.
+
+        Now we can test this out. And what should happen is that every once in a while, the UFO
+        stops moving for about 6 seconds and then starts flying around randomly again.
+    </div>
     <hr>
     <p>
         <strong>
-            Goal #2 - Trigger an abduction.
+            Goal #3 - The NAB.
         </strong>
     </p>
     <hr>
 
     <div class="directions">
-        We're really going to trigger a pre-abduction. And when the pre-abduction is done,
-        then the abduction will happen. This will happen randomly.
+        In order for the NAB to work, several things need to be set up.
+        1 - We need a beam.js.
+        2 - Each UFO needs to know about it's own NAB. So it can turn it on and off and update it.
+        3 - The game needs to know about all of the NABs.
+        4 - Draw needs to get the NABs from the game and draw them.
 
-        Don't we already have a randomize function somewhere?  Yes.  
+        For Goal #3 - We focus only on the NAB.
 
-        Perfect. Every time the timer ends we call randomize. And now instead of just
-        changing directions, we'll need to decide on a next action. Mostly that will
-        be flying.
+        Step 1 - Create the beam.
+
+        Create a beam.js and it will have three functions to export:
+        getBeam(), updateBeam(), turnOffBeam().
+
+        Step 2 - getBeam
+
+        Make the beam complex. That way we can have two parts. The beam itself. And then we can
+        draw the abductee on top of the beam and change its position as it moves up.
+
+        When we first get the beam, we really don't want to draw it. So we need something to tell
+        the draw function not to draw it. So add a display property with a value of false.
     </div>
+
+    <div class="codeblock">
+        <code>
+            display: false,
+        </code>
+    </div>
+
+    <div class="directions">
+        And since we're not displaying it yet, we really don't care about x, y, height and width
+        Just give them any value for now. Same for parts. Just give it an empty array for starters.
+        Now when the beam turns on, then we need to figure all that out. But that's not this functions
+        job. This function just needs to give the ufo and beam object back.
+
+        Step 2 - turnOffBeam
+
+        We'll do this function next because it's super easy. When this function gets called, it will
+        take a beam object in, and set display = false. That's it. That's the signal to the draw
+        function not to draw it.
+
+        Step 3 - updateBeam
+
+        This will also turn it on. The ufo object will get passed in. Which will have a reference
+        to the beam. And this will be the hard part. We need to figure out x, y, width, height and
+        get the parts. Just like the ufo, we can have a function called get parts. Other than copying
+        the code from the solution, there's really no easy way other than do the work and figure this
+        out. So give it a try and see how far you can get.
+    </div>
+
+    <p>
+        <strong>
+            Goal #4 - The UFO and the NAB.
+        </strong>
+    </p>
+    <hr>
+
+    <div class="directions">
+        Just a few details for the UFO to get the NAB working.
+
+        First, when we create the ufo, create an attribute called beam and call getBeam()
+        to assign its value.
+
+        Second, during post-abduction, call the turnBeamOff function.
+
+        Third, during abduction, call the updateBeam function.
+
+        During pre-abduction, we really don't want to do anything. Just wait. So that part
+        is easy.
+    </div>
+
+    <p>
+        <strong>
+            Goal #5 - Update the Game.
+        </strong>
+    </p>
+    <hr>
+
+    <div class="directions">
+        The game should have a list of beams. Just like it has a list of ufos.
+        All we need is a function that will loop over the ufos and add their beams
+        to an array and return it.
+    </div>
+
+    <p>
+        <strong>
+            Goal #6 - Update Draw.
+        </strong>
+    </p>
+    <hr>
+
+    <div class="directions">
+        Two things are needed here.
+
+        First, just like we draw the ufos, we can draw the beams.
+
+        Second, we need to check for that display property. There's two options.
+
+        Option 1 - Give every object a display property. If the value is true, draw it. If the
+        value is false, skip drawing it.
+
+        Option 2 - If the object doesn't have a display property, then assume it wants to be
+        drawn and go ahead and draw it. The if statement is a little trickier but then we don't
+        have to udpate all the other objects with display: true.
+
+        The solution went with Option 1.
+    </div>
+
+    <hr>
+    <p>
+        <strong>
+            Cheats, Hints, Starters, Snippets
+        </strong>
+    </p>
+
+    <div class="directions">
+        Code for Goal #2
+    </div>
+
     <div class="codeblock">
         <code>
             function randomize(ufo) {
 
                 if (ufo.mode == "Pre-Abduction") {
-                    //pre-abduction is over!  What next?
+                    //here's what we do when pre-abduction is over! Change the mode.
+                    //set the timer.
                 } else if (ufo.mode == "Abduction") {
-                    //abduction is over.  What next?
+                    //abduction is over.  What next?  Change the mode.  Set the timer.
                 } else if (ufo.mode == "Post-Abduction") {
-                    //Time to start flying again.  
+                    //Change the mode.  Set the timer.  
                 } else if (ufo.mode == "Flying") {
                     var r = (Math.floor(Math.random() * 1000))
                     if (r <= ??) {
@@ -115,154 +257,132 @@
                     }
                 }
             }
-        </code>
-    </div>
-    <div class="directions">
-        Hopefully you got that working. Test it out and see what happens.
-        And working right now means the UFO stops moving for about 6 seconds.
-
-        And if it doesn't stop moving then it means we forgot something.
-        We should only update the position of the UFO, when the UFO is ________.
-    </div>
-
-
-    <hr>
-    <p>
-        <strong>
-            Goal #3 - Update the Update.
-        </strong>
-    </p>
-    <hr>
-
-    <div class="directions">
-        Step 1 - Get the logic setup. 
-
-        Right now we only udpate when flying.  And that means adjusting the position based
-        on the speed.  But what about the other modes.
-
-        For Pre-Abduction, we really won't do much for now. We can just make sure the UFO
-        doesn't move.  That should be easy.  Later we can add some special effects if we want.
-
-        For Abduction, we want to create the beam and add it to the list of drawables.
-        That's a challenge because ufo.js doesn't have the list of drawables.  We'll
-        need to fix that. So we'll leave that blank for now.
-
-        For Post-Abduction, the main thing will be to remmove the beam from the list of
-        drawables.  
-    </div>
-
-    <div class="codeblock">
-            <code>
-                export function updateUFO(ufo) {
-                    if (Date.now() > ufo.timer) randomize(ufo);
-
-                    if (ufo.mode == "Flying") {
-                        //Keep doing all the stuff we did before.
-                    }
-
-                    if (ufo.mode == "Pre-Abduction") {
-                        //Change UFO Color or Add some kind of animation. Later.
-                    }
-
-                    if (ufo.mode == "Abduction") {
-                        var beam = getBeam(ufo);
-                        ufo.beam = beam;
-                        //add beam to drawables.  Not ready yet.  
-                    }
-
-                    if (ufo.mode == "Post-Abduction") {
-                        //Remove the Beam from the drawables.  Not ready yet.
-                    }
-
-                    ufo.parts = getParts(ufo);
-                }
             </code>
-        </div>
+    </div>
 
     <div class="directions">
-        Step 2 - Create that getBeam fucntion.  It can return null or an empty object
-        for now.  
-
-        Step 3 - We'll need those drawables.  Let's go to main.js and reorganize.  We can put
-        everything in an object called game.  We need to fix a couple things.  This is 
-        only a little bit painful.  Three small changes.    
+        Code for Goal #3
     </div>
 
     <div class="codeblock">
         <code>
-            var game = {stats: stats, drawables: [earth, sky, ufo]};
-            //DELETE the drawables var!!!!
+            import { EARTH_HEIGHT } from './earth.js';
 
-            updateUFO(ufo, game);
-
-            drawAll(ctx, game.drawables);
-        </code>
-    </div>
-
-    <div class="directions">
-        Step 3 - Now when we call updateUFO, pass in the drawables.
-    </div>
-
-    <div class="codeblock">
-        <code>
-                updateUFO(ufo, drawables);
-
-                export function updateUFO(ufo, drawables) {
-        </code>
-    </div>
-
-    <div class="directions">
-        Step 3 - Now update the updateUFO function so it takes in game.
-        
-        Now we're ready to abduct.  Finally.
-    </div>
-
-    <hr>
-    <p>
-        <strong>
-            Goal #4 - Abduction!!!
-        </strong>
-    </p>
-    <hr>
-
-    <div class="directions">
-        Step 1 - Add some detail to our getBeam function.   It's a drawable so it will
-        need all the regular stuff. x, y, width, height and a color.
-    </div>
-
-    <div class="codeblock">
-        <code>
-            function getBeam(ufo) {
-
-                var width = 8;
-                var ufoCenter = ufo.x + (ufo.width /2);
-                var ufoBottom = ufo.y + ufo.height;
+            export function getBeam(canvas) {
             
                 var beam = {
-                    type: "rectangle",
-                    x: ufoCenter - (width /2), y: ufoBottom, 
-                    width: width, height:  EARTH_HEIGHT - ufoBottom, 
-                    color: '#00ff00'
+                    type: "complex",
+                    x: 1, y: 1, width: 4, height: 1,
+                    ground: canvas.height - EARTH_HEIGHT,  
+                    display: false,
+                    parts: []
                 };
                 return beam;
             }
+            
+            function getParts(beam, ufo) {
+                
+                var b = {
+                    type: "rectangle",
+                    x: beam.x, y: beam.y, width: beam.width, height: beam.height,
+                    color: '#e60000', display: true
+                };
+            
+                var millisecondsRemaining = ufo.timer - Date.now();
+                var percentRemaining = millisecondsRemaining / 3000;
+                var abducteeY = beam.y + (beam.height * percentRemaining);
+                var abductee = {
+                    type: "rectangle",
+                    x: beam.x, y: abducteeY, width: beam.width, height: beam.width,
+                    color: '#ffffff', display: true
+                };
+            
+                var parts = [b, abductee];
+                return parts;
+            }
+            
+            export function updateBeam(ufo) {
+                var beam = ufo.beam;
+                beam.display = true;
+                beam.x = ufo.x + (ufo.width / 2) - (beam.width/2);
+                beam.y = ufo.y + ufo.height;
+                beam.height = beam.ground - beam.y;
+                beam.parts = getParts(beam, ufo);
+            }
+            
+            export function turnOffBeam(ufo) {
+                ufo.beam.display = false;
+            }
         </code>
     </div>
 
     <div class="directions">
-        Step 2 - Go back and finish off our updates.
-        For abduction, add the beam to drawables.  We can use the push command.
+        Code for Goal #4
     </div>
 
     <div class="codeblock">
         <code>
-            if (ufo.mode == "Abduction") {
-                var beam = getBeam(ufo);
-                ufo.beam = beam;
-                game.drawables.push(beam);
+            beam: getBeam(canvas),
+
+
+            } else if (ufo.mode == "abduction") {
+                updateBeam(ufo);
+            } else if (ufo.mode == "post-abduction") {
+                turnOffBeam(ufo);
             }
         </code>
     </div>
+
+    <div class="directions">
+        Code for Goal #5
+    </div>
+
+    <div class="codeblock">
+        <code>
+                var beams = getBeams(ufos);
+    
+                function getBeams(ufos) {
+                    var beams = [];
+                    for (???) {
+                        ???;
+                    }
+                    return beams;
+                }
+            </code>
+    </div>
+
+    <div class="directions">
+        Code for Goal #5
+    </div>
+
+    <div class="codeblock">
+        <code>
+            var beams = getBeams(ufos);
+
+            function getBeams(ufos) {
+                var beams = [];
+                for (???) {
+                    ???;
+                }
+                return beams;
+            }
+        </code>
+    </div>
+
+    <div class="directions">
+        Code for Goal #6
+    </div>
+
+    <div class="codeblock">
+        <code>
+            drawComplex(game.ctx, ???);
+
+            function drawObject(ctx, object) {
+                if (object.display) {....
+        </code>
+    </div>
+
+    <hr>
 
     <hr>
 </body>
