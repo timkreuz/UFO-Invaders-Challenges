@@ -1,0 +1,64 @@
+// .page-section {
+//     padding: 6rem 0;
+//     .page-section-heading {
+//       font-size: 2.25rem;
+//       line-height: 2rem;
+//     }
+//     @include media-breakpoint-up(lg) {
+//       .page-section-heading {
+//         font-size: 3rem;
+//         line-height: 2.5rem;
+//       }
+//     }
+//   }
+
+body {
+  background: $dark;
+}
+
+.txt-shadow {
+  // text-shadow: 1.5px 1.5px $eBlue;
+  text-shadow: 0 0 20px $eBlue;
+}
+
+
+.div-shadow {
+  box-shadow: 20px 20px $eBlue;
+}
+
+.spacer {
+  height: 900px;
+  background-color: $dark;
+}
+
+.text-view {
+    padding-top: 160px;
+    background-color: $dark;
+    justify-content: center;
+    color: $eGreen;
+}
+
+.caption {
+    background-color: transparent;
+    justify-content: center;
+    border-style: double;
+    border-color: $eGreen;
+    color: $eGreen;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    padding-left: 8px;
+    padding-right: 8px;
+    margin-top: 3px;
+}
+
+p {
+  color: $accent
+}
+
+a:link, a:visited, a:active {
+  color: $eBlue;
+}
+
+a:hover {
+  color: $eGreen;
+}

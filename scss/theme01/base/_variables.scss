@@ -1,0 +1,30 @@
+// Variables
+
+// Set custom colors
+$ltBlue: #61a1cf !default;
+$eBlue: #7c90e9 !default;
+$dSlate: #3f4144 !default;
+$straw: #eed35c !default;
+$eGreen: #49dd44 !default;
+$accent: #e4eee9 !default;
+$slate: #696d72 !default;
+$dSlate: #323436 !default;
+$autumn:#ce6713 !default;
+
+// Override Bootstrap colors
+$primary: $dSlate !default;
+$secondary: $eGreen !default;
+$dark: $dSlate !default;
+$white: $eGreen !default;
+$success: $eBlue !default;
+
+// Override Bootstrap font variables
+$font-family-baloo: 'Baloo Thambi 2', cursive;
+
+$font-family-sans-serif: $font-family-baloo !default;
+$headings-font-family: $font-family-baloo !default;
+// $headings-font-weight: 400 !default;
+
+// Override Bootstrap border variables
+$border-width: 2px !default;
+$border-color: $white !default;
