@@ -32,7 +32,7 @@ body {
 }
 
 .text-view {
-    padding-top: 160px;
+    padding-top: 180px;
     background-color: $dark;
     justify-content: center;
     color: $eGreen;
@@ -61,4 +61,25 @@ a:link, a:visited, a:active {
 
 a:hover {
   color: $eGreen;
+}
+
+.directions {
+  color: $light;
+}
+
+
+.codeblock {
+  border: 2px solid $secondary;
+  border-style: groove;
+  // margin-left: 40px;
+  background-color: $primary;
+  color: $light;
+  width: 700px;
+  font-size: 1em;
+  // padding: 1px;
+  white-space: pre
+}
+
+pre {
+  color: $light;
 }
