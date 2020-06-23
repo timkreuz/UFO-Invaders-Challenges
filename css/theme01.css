@@ -9895,11 +9895,16 @@ body {
 }
 
 .txt-shadow {
-  text-shadow: 0 0 20px #7c90e9;
+  text-shadow: 2px 2px 8px #7c90e9;
 }
 
 .div-shadow {
   box-shadow: 20px 20px #7c90e9;
+}
+
+.goal {
+  color: #49dd44;
+  text-shadow: 0.8px 0.8px #7c90e9;
 }
 
 .spacer {
@@ -9925,6 +9930,7 @@ body {
   padding-left: 8px;
   padding-right: 8px;
   margin-top: 3px;
+  text-shadow: 0.5px 0.5px #7c90e9;
 }
 
 p {
