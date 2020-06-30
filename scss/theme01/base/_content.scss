@@ -58,7 +58,8 @@ body {
 }
 
 p {
-  color: $accent
+  color: $accent;
+  white-space: pre
 }
 
 a:link, a:visited, a:active {

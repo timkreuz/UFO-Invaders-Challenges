@@ -9935,6 +9935,7 @@ body {
 
 p {
   color: #e4eee9;
+  white-space: pre;
 }
 
 a:link, a:visited, a:active {
