@@ -82,52 +82,45 @@
 
         <div class="row">
 
-            <div class="col-1"></div>
+            <div class="col-12 directionblock">
+                Git Bash: <a href="https://git-scm.com/downloads" target="_blank">Install</a>
 
-            <div class="col-10 directions">
-                <p>Git Bash: <a href="https://git-scm.com/downloads" target="_blank">Install</a></p>
+                Visual Studio Code: <a href="https://code.visualstudio.com/download" target="_blank">Install</a>
 
-                <p>Visual Studio Code: <a href="https://code.visualstudio.com/download" target="_blank">Install</a></p>
+                Git Hub:
+                The Code:&nbsp;<a href="https://github.com/timkreuz/UFO-Invaders/tree/cc2000-starter"
+                    target="_blank">Start with this Branch: cc2000-starter</a>
+                The Challenges:&nbsp;<a href="https://github.com/timkreuz/UFO-Invaders-Challenges" target="_blank">Just
+                    get the master branch.</a>
+                Clone these branches and install in C:\Dev\Git. Here's the commands...
 
-                <p>Git Hub:
-                    The Code:&nbsp;<a href="https://github.com/timkreuz/UFO-Invaders/tree/cc2000-starter"
-                        target="_blank">Start
-                        with this Branch: cc2000-starter</a><br />
-                    The Challenges:&nbsp;<a href="https://github.com/timkreuz/UFO-Invaders-Challenges"
-                        target="_blank">Just
-                        get
-                        the master branch.</a></br>
-                    Clone these branches and install in C:\Dev\Git. Here's the commands...</p>
-
-                <p>From C:\Dev\Git</p>
+                From C:\Dev\Git
                 <div class="codeblock">
                     git clone https://github.com/timkreuz/UFO-Invaders.git
                     git clone https://github.com/timkreuz/UFO-Invaders-Challenges.git
-                </div><br>
+                </div>
 
-                <p>From C:\Dev\Git\UFO-Invaders</p>
+                From C:\Dev\Git\UFO-Invaders
                 <div class="codeblock">
                     git checkout cc2000-starter
                     git branch cc2001-ufo-sparky
-                </div><br>
+                </div>
 
-                <p>From C:\Dev\Git\UFO-Invaders-Challenges</p>
+                From C:\Dev\Git\UFO-Invaders-Challenges
                 <div class="codeblock">
                     git checkout edition-2020
-                </div><br>
-                <br />
+                </div>
 
-                <p>Visual Studio Code: <a href="https://code.visualstudio.com/download" target="_blank">Install</a></br>
-                    Create/Open a Workspace and add UFO-Invaders to the Workspace</p>
+                Visual Studio Code: <a href="https://code.visualstudio.com/download" target="_blank">Install</a></br>
+                Create/Open a Workspace and add UFO-Invaders to the Workspace
 
-                <p>Node.js: <a href="https://nodejs.org/en/download/" target="_blank">Install</a></br>
-                    Open bash/command window in ufo-invaders folder and type http-server</p>
+                Node.js: <a href="https://nodejs.org/en/download/" target="_blank">Install</a></br>
+                Open bash/command window in ufo-invaders folder and type http-server
 
-                <p>http-server: <a href="https://www.npmjs.com/package/http-server" target="_blank">Install</a></br>
-                    Open bash/command window in ufo-invaders folder and type http-server</p>
+                http-server: <a href="https://www.npmjs.com/package/http-server" target="_blank">Install</a></br>
+                Open bash/command window in ufo-invaders folder and type http-server
 
             </div>
-            <div class="col-1"></div>
         </div>
 
         <!-- CHALLENGE 01 -->
@@ -139,38 +132,34 @@
         <h4 class="goal">Where's the UFO?</h4>
 
         <div class="row">
-            <div class="col-1"></div>
-            <div class="col-10 directions">
+            <div class="col-12 directionblock">
+                <strong>UFO Invaders!</strong>
 
-                <p><strong>UFO Invaders!</strong></p>
+                In the past it was only crazies on the fringe who believed in aliens and their occasional abductions
+                of humans and animals.
 
-                <p>In the past it was only crazies on the fringe who believed in aliens and their occasional abductions
-                    of humans and animals.</p>
+                But lately the aliens have become more bold and their abductions of cats and chickens is
+                believed by just about everybody. But now fresh evidence from the fake media shows that
+                they plan to colonize and take over the whole planet.
 
-                <p>But lately the aliens have become more bold and their abductions of cats and chickens is
-                    believed by just about everybody. But now fresh evidence from the fake media shows that
-                    they plan to colonize and take over the whole planet.</p>
+                It's our job to develop a defense system and strategies to protect our planet. We'll
+                need a shield, some missiles and a new technology - exploding chickens.
 
-                <p>It's our job to develop a defense system and strategies to protect our planet. We'll
-                    need a shield, some missiles and a new technology - exploding chickens.</p>
+                <strong>Since this game is called UFO Invaders, lets start by creating the evil UFO.</strong>
 
-                <p><strong>Since this game is called UFO Invaders, lets start by creating the evil UFO.</strong></p>
+                Here's the overall plan:
 
-                <p>Here's the overall plan:</p>
+                1 - We'll create a ufo object, just like we already have the sky and earth.
 
-                <p>1 - We'll create a ufo object, just like we already have the sky and earth.</p>
+                2 - We'll give it some speed values. And create an update function that we can use to make it fly.
 
-                <p>2 - We'll give it some speed values. And create an update function that we can use to make it fly.
-                </p>
+                3 - Since it just flies off the screen, we'll give it some boundaries telling it how far it's allowed
+                to go up, down, left and right. We'll then use those to make it change directions and stay on the
+                screen.
 
-                <p>3 - Since it just flies off the screen, we'll give it some boundaries telling it how far it's allowed
-                    to go up, down, left and right. We'll then use those to make it change directions and stay on the
-                    screen.</p>
-
-                <p>4 - Because ufos don't fly around in nice predictable patterns, we'll randomize its movement.</p>
+                4 - Because ufos don't fly around in nice predictable patterns, we'll randomize its movement.
 
             </div>
-            <div class="col-1"></div>
         </div>
 
 
@@ -179,29 +168,25 @@
         <h4 class="goal">Goal #1: Draw a UFO in the Sky.</h4>
 
         <div class="row">
-            <div class="col-1"></div>
-            <div class="col-10 directions">
+            <div class="col-10 directionblock">
+                This first UFO is going to be a simple rectangle. That's really boring but for now we just want to
+                get the mechanics working. Later we can replace that with an image or something more complex.
 
-                <p>This first UFO is going to be a simple rectangle. That's really boring but
-                    for now we just want to get the mechanics working. Later we can replace that
-                    with an image or something more complex.</p>
+                Step 1 - Create a new file called ufo.js in the objects folder.
 
-                <p>Step 1 - Create a new file called ufo.js in the objects folder.</p>
+                Step 2 - Create an object called ufo. Just look at earth.js or sky.js as examples.
+                Place it up in the upper left somewhere.
 
-                <p>Step 2 - Create an object called ufo. Just look at earth.js or sky.js as examples.
-                    Place it up in the upper left somewhere.</p>
+                Step 3 - On main.js import getUFO. Again the same as we do for the earth and sky.
 
-                <p>Step 3 - On main.js import getUFO. Again the same as we do for the earth and sky.</p>
+                Step 4 - Create a drawUFO function. Just like... You got the idea.
 
-                <p>Step 4 - Create a drawUFO function. Just like... You got the idea.</p>
+                Step 5 - Call the drawUFO function.
 
-                <p>Step 5 - Call the drawUFO function.</p>
-
-                <p>Step 6 - Display your page and make sure you can see the UFO. It should be
-                    sitting up in the sky do nothing except looking around for cats chickens.</p>
+                Step 6 - Display your page and make sure you can see the UFO. It should be sitting up in the sky
+                do nothing except looking around for cats and chickens.
 
             </div>
-            <div class="col-1"></div>
         </div>
 
         <div class="row bg-success" style="height:2px"></div>
@@ -209,22 +194,20 @@
         <h4 class="goal">Goal #2: Make the UFO Move.</h4>
 
         <div class="row">
-            <div class="col-1"></div>
-            <div class="col-10 directions">
+            <div class="col-12 directionblock">
+                Now things are going to get exciting. At least for about 3-4 seconds.
 
-                <p>Now things are going to get exciting. At least for about 3-4 seconds.</p>
+                Step 1 - Update our ufo and give it two new attributes:
+                speedX will tell us how fast it moves from left to right. Start that out at 2.
+                speedY will tell us how fast is moves up and down. Start that out at 2 also.
 
-                <p>Step 1 - Update our ufo and give it two new attributes:
-                    speedX will tell us how fast it moves from left to right. Start that out at 2.
-                    speedY will tell us how fast is moves up and down. Start that out at 2 also.</p>
+                Step 2 - Add a new function to ufo.js to update the ufo.
 
-                <p>Step 2 - Add a new function to ufo.js to update the ufo.</p>
+                Step 3 - In that new function add speed to the ufo's x position.
 
-                <p>Step 3 - In that new function add speed to the ufo's x position.</p>
+                Step 4 - Import that function on main.js just like we imported getUFO.
 
-                <p>Step 4 - Import that function on main.js just like we imported getUFO.</p>
-
-                <p>Step 5 - Call that new function from our draw function. Update first. Then draw.</p>
+                Step 5 - Call that new function from our draw function. Update first. Then draw.
 
                 <div class="codeblock">
                     export function updateUFO(ufo) {
@@ -236,8 +219,7 @@
                     updateUFO(ufo);
                 </div>
 
-                </br>
-                <p>Display your page. Watch the UFO fly away!!!</p>
+                Display your page. Watch the UFO fly away!!!
 
             </div>
             <div class="col-1"></div>
@@ -249,13 +231,11 @@
         <h4 class="goal">Goal #3: Get the UFO to stay on the screen.</h4>
 
         <div class="row">
-            <div class="col-1"></div>
-            <div class="col-10 directions">
+            <div class="col-12 directionblock">
+                Bad UFO! Stay!
 
-                <p>Bad UFO! Stay!
-
-                <p>Step 1 - Update our ufo and give it four new attributes:</p>
-                <p>maxLeft, maxRight, maxUp and maxDown. Give those some values that make sense.</p>
+                Step 1 - Update our ufo and give it four new attributes:
+                maxLeft, maxRight, maxUp and maxDown. Give those some values that make sense.
 
                 <div class="codeblock">
                     export function getUFO(canvas) {
@@ -263,25 +243,20 @@
                     maxLeft: ?, maxRight: canvas.?,
                     maxUp: ?, maxDown: canvas.height /?,
                 </div>
-                <br />
 
-                <p>Step 2 - In the udpate function, if the UFO hits the right sides of the screen,
-                have it reverse back the other way.</p>
+                Step 2 - In the udpate function, if the UFO hits the right sides of the screen, have it reverse back the
+                other way.
 
                 <div class="codeblock">
                     if (ufo.x + ufo.width > ufo.maxRight) {
                     ufo.speedX = ufo.speedX * -1;
                     }
                 </div>
-                <br />
 
-                <p>Refresh your game and make sure that works.</p>
-                <p>Code a little. Test a little.</p>
+                Refresh your game and make sure that works. Code a little. Test a little.
 
-                <p>Step 3 - Now do the same for the left and top and bottom.</p>
-
+                Step 3 - Now do the same for the left and top and bottom.
             </div>
-            <div class="col-1"></div>
         </div>
 
 
@@ -290,52 +265,45 @@
         <h4 class="goal">Goal #4: Still too boring. Aliens aren't that predictable.</h4>
 
         <div class="row">
-            <div class="col-1"></div>
-            <div class="col-10 directions">
-
-                <p>
+            <div class="col-12 directionblock">
                 This part will be a bit more challenging. But let's make the UFO fly around randomly
                 and change directions and speed every 2-5 seconds. Because anyone who knows anything
-                about UFOs knows they don't fly around in nice predictable patterns.</p>
+                about UFOs knows they don't fly around in nice predictable patterns.
 
-                <p>2-5 seconds in javascript is 2000-5000 milliseconds.</p>
+                2-5 seconds in javascript is 2000-5000 milliseconds.
 
-                <p>Step 1 - Update your UFO and give it a new attribute called timer. This means do
-                    whatever it is you're doing for 3 seconds. Then we'll mix thins up.</p>
+                Step 1 - Update your UFO and give it a new attribute called timer. This means do
+                whatever it is you're doing for 3 seconds. Then we'll mix thins up.
 
                 <div class="codeblock">
                     timer: Date.now() + 3000
                 </div>
-                <br />
 
-                <p>Step 2 - Create a new function call randomize.
-                    It will take ufo as input. And for now it won't do anything.</p>
+                Step 2 - Create a new function call randomize.
+                It will take ufo as input. And for now it won't do anything.
 
                 <div class="codeblock">
                     function randomize(ufo) {
                     }
                 </div>
-                <br />
 
-                <p>Step 3 - Now in our update function we'll call randomize every time the timer is done.</p>
+                Step 3 - Now in our update function we'll call randomize every time the timer is done.
 
                 <div class="codeblock">
                     if (Date.now() > ufo.timer) {
                     randomize(ufo);
                     }
                 </div>
-                <br />
 
+                Step 4 - Now let's randomize the ufo.
+                All we need to do is change the speeds and set a new timer.
 
-                <p> Step 4 - Now let's randomize the ufo.
-                    All we need to do is change the speeds and set a new timer.</p>
+                For the speeds generate a random number 0-90. Then subtracted 45 to get a
+                random number between -45 and 45. Then I divided by 10 to get random speeds
+                from -4.5 to 4.5. That might be too fast, but for now it's good.
 
-                <p>For the speeds generate a random number 0-90. Then subtracted 45 to get a
-                    random number between -45 and 45. Then I divided by 10 to get random speeds
-                    from -4.5 to 4.5. That might be too fast, but for now it's good.</p>
-
-                <p> For the timer we get random numbers between 0 and 1000. Then add 2000. So
-                    that's 2000-3000 milliseconds. Or 2-3 seconds.</p>
+                For the timer we get random numbers between 0 and 1000. Then add 2000. So
+                that's 2000-3000 milliseconds. Or 2-3 seconds.
 
                 <div class="codeblock">
                     function randomize(ufo) {
@@ -344,52 +312,43 @@
                     ufo.timer = Date.now() + Math.floor(Math.random() * 1000) + 2000;
                     }
                 </div>
-                <br />
 
-                <p> Nice! It's still a boring rectangle, but that's the way real UFOs fly around.</p>
+                Nice! It's still a boring rectangle, but that's the way real UFOs fly around.
 
             </div>
-            <div class="col-1"></div>
         </div>
 
 
-
-        <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
         <div id="challenge02" class="row text-view">
             <div class="caption">Challenge 02 - Enhancements</div>
         </div>
         <br />
         <h4 class="goal">Code That Works A Lot Better</h4>
 
-
         <div class="row">
-            <div class="col-1"></div>
-            <div class="col-10 directions">
-                <br>
-                <strong>Boring Code Improvements!</strong><br><br>
+            <div class="col-12 directionblock">
+                <strong>Boring Code Improvements!</strong>
 
-                <p>Starting Branch: cc2001-ufo<br>
-                    Solution Branch: cc2001-enhance</p>
+                Starting Branch: cc2001-ufo
+                Solution Branch: cc2001-enhance
 
-                <p>The first problem is we're going to be drawing a lot more objects - like abduction
-                    beams, and defense systems and missiles and shields and alien invaders. All the fun stuff.
-                    And that's going be a lot of ctx begin, draw, fill, etc... Over and over and over and eventually
-                    that's going to get old so let's find a better way not to make the fun stuff more fun.</p>
+                The first problem is we're going to be drawing a lot more objects - like abduction
+                beams, and defense systems and missiles and shields and alien invaders. All the fun stuff.
+                And that's going be a lot of ctx begin, draw, fill, etc... Over and over and over and eventually
+                that's going to get old so let's find a better way not to make the fun stuff more fun.
 
-                <p>The second problem is all we can draw right now are boring rectangles. What if
-                    we want to draw an ellipse, or a more complex object or display a cool image.
-                    So we'll fix that too.</p>
+                The second problem is all we can draw right now are boring rectangles. What if
+                we want to draw an ellipse, or a more complex object or display a cool image.
+                So we'll fix that too.
 
-                <p>And third, we need to think about the overall strategy to this game before it gets
-                    too messy and difficult to work with. </p>
+                And third, we need to think about the overall strategy to this game before it gets
+                too messy and difficult to work with.
 
-                <p>And there's probably a couple of other little things to fix.</p>
+                And there's probably a couple of other little things to fix.
 
-                <p>Hopefull this won't be too painful. A few baby steps and some copy paste we can
-                    get this done.</p>
+                Hopefull this won't be too painful. A few baby steps and some copy paste we can get this done.
 
             </div>
-            <div class="col-1"></div>
         </div>
         <div class="row bg-success" style="height:2px"></div>
         <br><br>
@@ -397,201 +356,176 @@
         <h4 class="goal">Goal #1: Improve the UFO Change Direction Code.</h4>
 
         <div class="row">
-            <div class="col-1"></div>
-            <div class="col-10 directions">
-
-                <p> Whether you hit the left of right side of the wall, you always change directions by
-                    multiplying the speed by -1. Let's add an 'or' statement to that code using '||'.</p>
+            <div class="col-10 directionblock">
+                Whether you hit the left of right side of the wall, you always change directions by
+                multiplying the speed by -1. Let's add an 'or' statement to that code using '||'.
 
                 <div class="codeblock">
                     if ((ufo.x + ufo.width > ufo.maxRight) || (ufo.x < ufo.maxLeft)) { ufo.speedX=ufo.speedX * -1; }
                         </div>
-                        <br />
 
-                        <p>Now do the same for the up and down direction changes. Make sure everything is still working.
-                        </p>
-
+                        Now do the same for the up and down direction changes. Make sure everything is still working.
                 </div>
-                <div class="col-1"></div>
+
             </div>
 
             <br>
             <h4 class="goal">Goal #2: Consolidate those draw functions in main.js.</h4>
 
             <div class="row">
-                <div class="col-1"></div>
-                <div class="col-10 directions">
-
-                    <p>Create a drawObject function.
-                    </p>
+                <div class="col-12 directionblock">
+                    Create a drawObject function.
 
                     <div class="codeblock">
                         function drawObject(object) {
                         //guess what goes here!
                         }
                     </div>
-                    <br />
 
-                    <p> Now figure out what you can get rid of.
-                        And there's something that needs to change.
+                    Now figure out what you can get rid of.
+                    And there's something that needs to change.
 
-                        Make sure your code still works.</p>
-
+                    Make sure your code still works.
                 </div>
-                <div class="col-1"></div>
             </div>
 
             <br>
             <h4 class="goal">Goal #3: Overall Strategy.</h4>
 
             <div class="row">
-                <div class="col-1"></div>
-                <div class="col-10 directions">
+                <div class="col-12 directionblock">
+                    This thing is going to get complex as we start adding more and more. And complex
+                    problems don't need complex solutions. They need simple ones.
 
-                    <p> This thing is going to get complex as we start adding more and more. And complex
-                        problems don't need complex solutions.  They need simple ones.
-                
-                        We'll have an object called game.  It will contain all the objects we're trying to
-                        manage.  Right now earth, sky, ufo, stats.  Later, there will be defense systems, aliens, 
-                        missiles, abduction beams, cats, exploding chickens... And it will contain the stats 
-                        and something to tell us the game is over and few other details we need.
-                
-                        Then we'll have a function to update the game.
-                
-                        And another function to draw the game.
-                
-                        And later we'll have a function to get events.  But that's later.
-                
-                        So for now we'll just do this. 
-                            Is the game over?  No.  Then Update and Draw.
-                            Is the game over?  No.  Then Update and Draw.
-                            Is the game over?  No.  Then update and Draw.
-                            Is the game over?  No.  Then update and Draw.
-                
-                        You get the idea.  And we'll just do that over and over hundreds and thousands of 
-                        times until either we destroy the aliens or they destroy us.  At which point the 
-                        game will be over and we'll can stop updating and drawing.
-                
-                        And that's a really simple strategy. 
-                
-                        So let's get this all set up.
-                
-                        Step 1 - Create a folder.  Call it control. (just like we have for objects)
-                
-                        Step 2 - Create 3 files there: game.js, update.js, draw.js
-                
-                        Step 3 - Inside game.js write some code to set up the game.  This will be a 
-                        good place to use your copy/paste skills.
+                    We'll have an object called game. It will contain all the objects we're trying to
+                    manage. Right now earth, sky, ufo, stats. Later, there will be defense systems, aliens,
+                    missiles, abduction beams, cats, exploding chickens... And it will contain the stats
+                    and something to tell us the game is over and few other details we need.
 
-                    </p>
+                    Then we'll have a function to update the game.
+
+                    And another function to draw the game.
+
+                    And later we'll have a function to get events. But that's later.
+
+                    So for now we'll just do this.
+                        Is the game over? No. Then Update and Draw.
+                        Is the game over? No. Then Update and Draw.
+                        Is the game over? No. Then update and Draw.
+                        Is the game over? No. Then update and Draw.
+
+                    You get the idea. And we'll just do that over and over hundreds and thousands of times until 
+                    either we destroy the aliens or they destroy us. At which point the game will be over and we'll 
+                    can stop updating and drawing.
+
+                    And that's a really simple strategy.
+
+                    So let's get this all set up.
+
+                    Step 1 - Create a folder. Call it control. (just like we have for objects)
+
+                    Step 2 - Create 3 files there: game.js, update.js, draw.js
+
+                    Step 3 - Inside game.js write some code to set up the game. This will be a
+                    good place to use your copy/paste skills.
 
                     <div class="codeblock">
                         import {getEarth} from '../objects/earth.js';
-                        import {getSky} from '../objects/sky.js'; 
-                        import {getUFO} from '../objects/ufo.js'; 
-                        import {getStats} from '../objects/stats.js'; 
-                        
+                        import {getSky} from '../objects/sky.js';
+                        import {getUFO} from '../objects/ufo.js';
+                        import {getStats} from '../objects/stats.js';
+
                         export function getGame() {
-                            var stats = getStats();
-                            var canvas = document.getElementById("myCanvas");
-                            var ctx = canvas.getContext("2d");
-                            var infoCenter = document.getElementById("infoCenter");
-                            var infoCtx = infoCenter.getContext("2d");
-                            var earth = getEarth(canvas);
-                            var sky = getSky(canvas);
-                            var ufo = getUFO(canvas);
-                        
-                            var game = {gameOver: false,
-                                        infoCenter: infoCenter, infoCtx: infoCtx,
-                                        canvas: canvas, ctx: ctx,
-                                        stats: stats,
-                                        earth: earth, sky: sky, ufo: ufo};
-                            return game;
+                        var stats = getStats();
+                        var canvas = document.getElementById("myCanvas");
+                        var ctx = canvas.getContext("2d");
+                        var infoCenter = document.getElementById("infoCenter");
+                        var infoCtx = infoCenter.getContext("2d");
+                        var earth = getEarth(canvas);
+                        var sky = getSky(canvas);
+                        var ufo = getUFO(canvas);
+
+                        var game = {gameOver: false,
+                        infoCenter: infoCenter, infoCtx: infoCtx,
+                        canvas: canvas, ctx: ctx,
+                        stats: stats,
+                        earth: earth, sky: sky, ufo: ufo};
+                        return game;
                         }
                     </div>
-                    <br />
 
-                    <p> And if you notice.  That's a bunch of stuff we already have in main.js.  
-                        But we can leave it all there in main.js for now.
-                        <br><br>
-                        Step 4 - Inside update.js let's do our update.</p>
+                    And if you notice. That's a bunch of stuff we already have in main.js.
 
+                    But we can leave it all there in main.js for now.
+
+                    Step 4 - Inside update.js let's do our update.
 
                     <div class="codeblock">
-                        import {updateUFO} from '../objects/ufo.js'; 
+                        import {updateUFO} from '../objects/ufo.js';
 
                         export function updateGame(game) {
                         //missing code. hint: it updates something.
                         }
                     </div>
 
-                    <br>
-                    <br>
-                    <p>Step 5 - Inside draw.js let's do our drawing. Another good time to use copy/paste. 
-                        There's going to be plenty of chances to do more coding here later.    </p>
+                    Step 5 - Inside draw.js let's do our drawing. Another good time to use copy/paste.
+                    There's going to be plenty of chances to do more coding here later.
 
-                
                     <div class="codeblock">
                         export function drawGame(game) {
-                            drawObjects(game);
+                        drawObjects(game);
                         }
-                        
+
                         function drawObjects(game) {
-                            game.ctx.clearRect(0, 0, game.canvas.width, game.canvas.height);
-                            drawObject(game.ctx, game.earth);
-                            drawObject(game.ctx, game.sky);
-                            drawObject(game.ctx, game.ufo);
+                        game.ctx.clearRect(0, 0, game.canvas.width, game.canvas.height);
+                        drawObject(game.ctx, game.earth);
+                        drawObject(game.ctx, game.sky);
+                        drawObject(game.ctx, game.ufo);
                         }
-                        
+
                         function drawObject(ctx, object) {
-                            ctx.beginPath();
-                            ctx.rect(object.x, object.y, object.width, object.height);
-                            ctx.fillStyle = object.color;
-                            ctx.fill();
-                            ctx.closePath();
+                        ctx.beginPath();
+                        ctx.rect(object.x, object.y, object.width, object.height);
+                        ctx.fillStyle = object.color;
+                        ctx.fill();
+                        ctx.closePath();
                         }
                     </div>
-                    <br>
-                    <p> Step 6 - Now let's clean up main.js. Be ready to be amazed.  
 
-                        You can delete all the stuff we moved out of here.  
-                        
-                        And because we're doing way more than drawing, rename draw to runGame. 
-                        
-                        And then you should end of with code that looks like this.... </p>
+                    Step 6 - Now let's clean up main.js. Be ready to be amazed.
 
-                
+                    You can delete all the stuff we moved out of here.
+
+                    And because we're doing way more than drawing, rename draw to runGame.
+
+                    And then you should end of with code that looks like this....
+
                     <div class="codeblock">
                         import {getGame} from './controllers/game.js';
                         import {drawGame} from './controllers/draw.js';
                         import {updateGame} from './controllers/update.js';
-                        
+
                         //add one line of code to get the game
-                        
+
                         function runGame() {
-                            if (?????) {
-                                //exactly one one line of code here.
-                            } else {
-                                //Exactly two lines of code are missing here.
-                            }
+                        if (?????) {
+                        //exactly one one line of code here.
+                        } else {
+                        //Exactly two lines of code are missing here.
                         }
-                        
+                        }
+
                         //Exactly one line of code here.
                     </div>
+                    Check that out. There's hardly anthing left in main.js.
 
-                    <br>
+                    In fact, looking at that code, it doesn't have any idea what kind of game this thing is.
 
-                    <p>  Check that out.  There's hardly anthing left in main.js.  In fact, looking at that code, 
-                        we don't have any idea what kind of game this thing is running.  It could be about ufos
-                        and aliens. Or it could be rainbows and unicorns and fighting jellyfish.  It doesn't know
-                        or care. 
-                        
-                        So just with what we have here, you have what it takes to start creating your own game.   </p>
-
+                    One person could go off and create a game about ufos and aliens. And another person could go 
+                    make a game about rainbows and unicorns and fighting jellyfish. And both could run their game 
+                    using this same code.
                 </div>
-                <div class="col-1"></div>
             </div>
-
 
             <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
             <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />

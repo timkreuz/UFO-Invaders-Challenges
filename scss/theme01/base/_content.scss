@@ -59,7 +59,6 @@ body {
 
 p {
   color: $accent;
-  white-space: pre
 }
 
 a:link, a:visited, a:active {
@@ -74,11 +73,22 @@ a:hover {
   color: $light;
 }
 
+.directionblock {
+  // border: 2px solid $success;
+  // border-style: groove;
+  // margin-left: 40px;
+  background-color: $primary;
+  color: $light;
+  // width: 700px;
+  font-size: 1em;
+  // padding: 1px;
+  white-space: pre
+}
 
 .codeblock {
   border: 2px solid $secondary;
   border-style: groove;
-  // margin-left: 40px;
+  margin-left: 70px;
   background-color: $primary;
   color: $light;
   width: 700px;
