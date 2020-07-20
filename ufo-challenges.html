@@ -60,6 +60,11 @@
                             <h5 class="txt-shadow">02- Enhancements</h6>
                         </a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#challenge03">
+                            <h5 class="txt-shadow">03- Defense System</h6>
+                        </a>
+                    </li>
                 </ul>
             </nav>
         </div>
@@ -409,13 +414,13 @@
                     And later we'll have a function to get events. But that's later.
 
                     So for now we'll just do this.
-                        Is the game over? No. Then Update and Draw.
-                        Is the game over? No. Then Update and Draw.
-                        Is the game over? No. Then update and Draw.
-                        Is the game over? No. Then update and Draw.
+                    Is the game over? No. Then Update and Draw.
+                    Is the game over? No. Then Update and Draw.
+                    Is the game over? No. Then update and Draw.
+                    Is the game over? No. Then update and Draw.
 
-                    You get the idea. And we'll just do that over and over hundreds and thousands of times until 
-                    either we destroy the aliens or they destroy us. At which point the game will be over and we'll 
+                    You get the idea. And we'll just do that over and over hundreds and thousands of times until
+                    either we destroy the aliens or they destroy us. At which point the game will be over and we'll
                     can stop updating and drawing.
 
                     And that's a really simple strategy.
@@ -521,16 +526,137 @@
 
                     In fact, looking at that code, it doesn't have any idea what kind of game this thing is.
 
-                    One person could go off and create a game about ufos and aliens. And another person could go 
-                    make a game about rainbows and unicorns and fighting jellyfish. And both could run their game 
+                    One person could go off and create a game about ufos and aliens. And another person could go
+                    make a game about rainbows and unicorns and fighting jellyfish. And both could run their game
                     using this same code.
                 </div>
+            </div>
+        </div>
+
+
+
+
+        <div id="challenge03" class="row text-view">
+            <div class="caption">Challenge 03 - Defense System</div>
+        </div>
+        <br />
+        <h4 class="goal">A Mobile Defense System to Protect the Earth from the Alien Swarm</h4>
+
+        <div class="row">
+            <div class="col-12 directionblock">
+                <strong>Let's Roll!</strong>
+
+                Starting Branch: cc2001-enhance
+                Solution Branch: cc2001-defend
+
+                Build a defender that glides back and forth along the surface of the earth.
+
+                And then give it a weapon to fire defense missiles to expel or destroy the enemy invaders.
+
+            </div>
+        </div>
+        <div class="row bg-success" style="height:2px"></div>
+        <br><br>
+
+        <h4 class="goal">Goal #1: Build a rectangular defense system.</h4>
+
+        <div class="row">
+            <div class="col-10 directionblock">
+                Nothing new here. Another dumb rectangle just like the UFOs.
+                A new object call defender.js with a getDefender function.
+            </div>
+        </div>
+
+        <br>
+        <h4 class="goal">Goal #2: Add Events</h4>
+
+        <div class="row">
+            <div class="col-12 directionblock">
+                First we need to add some listeners.
+
+                <div class="codeblock">
+                    document.addEventListener("keydown", keyDownHandler, false);
+                    document.addEventListener("keyup", keyUpHandler, false);
+                </div>
+
+                Then game will need to know about them eventually.
+                Guess where these go. And then add this to the game.
+
+                <div class="codeblock">
+                    var events = {leftPressed: false, rightPressed: false, spacePressed:false};
+                </div>
+
+                Create and events.js and register them in the game when they happen.
+
+                <div class="codeblock">
+
+                    export function keyDown(game, e) {
+
+                    if (e.keyCode == 37) {
+                    game.events.leftPressed = true;
+                    }
+                    else if (e.keyCode == 39) {
+                    game.events.rightPressed = true;
+                    }
+                    else if (e.keyCode == 32) {
+                    game.events.spacePressed = true;
+                    }
+                    }
+
+                    export function keyUp(game, e) {
+
+                    if (e.keyCode == 37) {
+                    game.events.leftPressed = false;
+                    }
+                    else if (e.keyCode == 39) {
+                    game.events.rightPressed = false;
+                    }.
+                    if (e.keyCode == 32) {
+                    game.events.spacePressed = false;
+                    }
+
+                    }
+                </div>
+
+                Now import those events on main.js.
+
+                <div class="codeblock">
+                    import {keyDown, keyUp} from './controllers/events.js';
+                </div>
+
+                Now hook the listeners and functions together.
+                This will go in main.js.  
+
+                <div class="codeblock">
+
+                    function keyDownHandler(e) {
+                    keyDown(game, e);
+                    }
+
+                    function keyUpHandler(e) {
+                    keyUp(game, e);
+                    }
+                </div>
+
+            </div>
+
+        </div>
+        <br>
+        <h4 class="goal">Goal #3: The Defender Moves.</h4>
+
+        <div class="row">
+            <div class="col-12 directionblock">
+                
+                Here's how it will work....
+
             </div>
 
             <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
             <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
             <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
         </div>
+
+
 
 </body>
 
