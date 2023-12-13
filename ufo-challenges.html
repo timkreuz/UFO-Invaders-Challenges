@@ -782,6 +782,14 @@
             
             }
 
+            function buildPart(ufo, xx, yy, width, height, color) {
+                return {
+                    type: "rectangle", xx: xx, yy: yy,
+                    x: ufo.x + xx, y: ufo.y + yy, width: width, height:height,
+                    color: color
+                }
+            }
+
 
             </div>
 
