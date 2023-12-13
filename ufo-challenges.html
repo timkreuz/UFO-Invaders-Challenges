@@ -761,41 +761,27 @@
            
             <div class="codeblock">
 
-            All objects already have a type of rectangle.
-            We will set things up with a new type of complex.
-            Any object that has a type of complex will need a new property called parts.
-
-            You can find examples here:
-            https://github.com/timkreuz/UFO-Invaders/tree/cc02-lights/ufo-invaders
-
-
-             1 - Update draw.js to draw complex objects.  Just more rectangles.  Not just one.  
-                
-                rename drawObject to drawRectangle
-                create new method drawObject - it will ask what type of object it is all call the appropriate method
-                    Challenge
-                    - if statement,  if object is a rectangle then call drawRectangle
-                    - find another if statement - Copy, Paste, Modify
-                create new method drawComplexObject
-                    - loops over all the parts and calls drawObject
-
-            2 - UFO
-                create empty array called parts = []
-                create some parts and add them to an array
-
-                keep it simple at first and make sure it all works
-
-            How can we get closer to coding on our own?
-            Start looking at your own code for examples
-            Code on your own
+            Fix our Random Color Problem
+            Code Improvements
+            Start Creating a More Complex UFO
+            
+            1 - Create new properties xx and yy inside the UFO
+            2 - Create a new function to update the UFO
+            3 - Create a function to build a UFO Part
+            4 - Create a new function to build a Nicer UFO
+            5 - Start Creating Parts
 
 
+            function updateParts(ufo) {
 
+                for (var i = 0; i < ufo.parts.length; i++) {
+                    var part = ufo.parts[i]
+                    part.x = ufo.x + part.xx
+                    part.y = ufo.y + part.yy
+                }
+            
+            }
 
-
-
-
-              
 
             </div>
 
