@@ -761,40 +761,41 @@
            
             <div class="codeblock">
 
-            Fix our Random Color Problem
+            Work on Our UFOs
             Code Improvements
-            Start Creating a More Complex UFO
+            - New Way to Loop
+            - Build Part - New Method
+            What would make it easier.  To do less math.
             
-            1 - Create new properties xx and yy inside the UFO
-            2 - Create a new function to update the UFO
-            3 - Create a function to build a UFO Part
-            4 - Create a new function to build a Nicer UFO
-            5 - Start Creating Parts
-
-
-            function updateParts(ufo) {
-
-                for (var i = 0; i < ufo.parts.length; i++) {
-                    var part = ufo.parts[i]
-                    part.x = ufo.x + part.xx
-                    part.y = ufo.y + part.yy
-                }
+            Extra Challenges
             
-            }
+            Challenge 1
+            Fix Problems with Any UFO Movement
 
-            function buildPart(ufo, xx, yy, width, height, color) {
-                return {
-                    type: "rectangle", xx: xx, yy: yy,
-                    x: ufo.x + xx, y: ufo.y + yy, width: width, height:height,
-                    color: color
-                }
-            }
+            Challenge 2
+            Change loops to the new way of doing things.
+
+            Challenge 3
+            Try a New Method to Build a Part that Uses Percents
+
+                Starts 0% from the left side, 45% down, goes 100% across, 10 percent down.
+                Is this better? 
+                buildPart(ufo, 0, 45, 100, 10)
+
+                Is there another way you like better?
+
+            Challenge 4
+            Draw other shapes:
+            
+                https://www.w3schools.com/graphics/canvas_intro.asp
+                Try adding a circle to object to your ufo.
+
+                
+            Challenge 5
+            Do anything else you want that would be fun.
+
 
             
-            var top = buildPart(ufo, 0, 0, ufo.width, ufo.height/2, getRandomColor())
-            var bottom = buildPart(ufo, 0, ufo.height/2, ufo.width, ufo.height/2, getRandomColor())
-
-
             </div>
 
         </div>
