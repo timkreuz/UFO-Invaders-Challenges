@@ -784,7 +784,21 @@
 
                 What will happen to the UFO?
                 What will happen to the Stunner      
-                    
+            
+                
+            function generateNewStunner(game) {
+                var defender = game.defender;
+                var stunners = game.stunners;
+                for (var i = 0; i < stunners.parts.length; i++) {
+                    var stunner = stunners.parts[i];
+                    if (stunner.display == false) {
+                        stunner.x = defender.x + defender.width / 2 - stunner.width / 2;
+                        stunner.y = defender.y + stunner.height;
+                        stunner.display = true;
+                        break;
+                    }
+                }
+            }
             
             
             Extra Challenges
