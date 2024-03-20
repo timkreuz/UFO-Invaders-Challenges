@@ -833,7 +833,25 @@
                 Here we could put things like getRandomColor.
                 Or a function call doObjectsOverlap.  It takes two objects and returns true or false.
 
-            
+
+                
+                function isCollision(ufo, stunners) {
+                    var hit = false;
+                
+                    for (var i = 0; i < stunners.length; i++) {
+                        var stunner = stunners[i];
+                        if (stunner.display) {
+                            var stunner = stunners[i];
+                            if (objectsOverlap(stunner, ufo)) {
+                                hit = true;
+                                stunner.display = false;
+                                break;
+                            }
+                        }
+                    }
+                
+                    return hit;
+                }
             
             </div>
 
