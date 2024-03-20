@@ -834,7 +834,7 @@
                 Or a function call doObjectsOverlap.  It takes two objects and returns true or false.
 
 
-                
+
                 function isCollision(ufo, stunners) {
                     var hit = false;
                 
@@ -853,6 +853,26 @@
                     return hit;
                 }
             
+
+                export function objectsOverlap(o1, o2) {
+
+                    var o1Left = o1.x;
+                    var o1Right = o1.x + o1.width;
+                    var o1Top = o1.y;
+                    var o1Bottom = o1.y + o1.height;
+                
+                    var o2Left = o2.x;
+                    var o2Right = o2.x + o2.width;
+                    var o2Top = o2.y;
+                    var o2Bottom = o2.y + o2.height;
+                
+                    var xOverlap = (o1Left >= o2Left && o1Left <= o2Right) ||
+                        (o1Right >= o2Left && o1Right <= o2Right);
+                    var yOverlap = (o1Top <= o2Bottom && o1Top >= o2Top) ||
+                        (o1Bottom <= o2Bottom && o1Bottom >= o2Top);
+                
+                    return xOverlap && yOverlap;
+                }
             </div>
 
         </div>
